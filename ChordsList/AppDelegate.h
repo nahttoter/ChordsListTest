@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Reachability.h>
+#import <MagicalRecord.h>
+
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

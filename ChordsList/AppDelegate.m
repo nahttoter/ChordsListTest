@@ -12,7 +12,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    // Create a 4MB in-memory, 32MB disk cache
+    NSURLCache *cache = [[NSURLCache alloc] initWithMemoryCapacity:4*1024*1024
+                                                      diskCapacity:32*1024*1024
+                                                          diskPath:@"app_cache"];
+    
+    // Set the shared cache to our new instance
+    [NSURLCache setSharedURLCache:cache];
+    
+    //[ApiServiceInstance addInternetCheckerObserver];
+        // Override point for customization after application launch.
     return YES;
 }
 							
