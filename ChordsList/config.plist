@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>New item</key>
+	<string></string>
+	<key>Timeout</key>
+	<integer>10</integer>
+	<key>Host</key>
+	<string>http://www.songsterr.com/</string>
+	<key>reachabilityHostCheck</key>
+	<string>http://www.songsterr.com/</string>
+	<key>URL</key>
+	<dict>
+		<key>chordDiagram</key>
+		<string>a/ra/chordDiagrams.json</string>
+		<key>tuningNoteSample</key>
+		<string>a/wa/tuningNoteSample?note=%@&amp;instrument=%@</string>
+	</dict>
+</dict>
+</plist>

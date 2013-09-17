@@ -25,7 +25,9 @@ extern NSString * const DataManagerDidSaveFailedNotification;
 + (DataManager*)sharedInstance;
 - (BOOL)save;
 - (NSManagedObjectContext*)managedObjectContext;
+
 - (void) savingParseResultFrom:(NSDictionary *) chordsJSONDictionary;
+- (NSArray *) fetchSpecificChordsByName:(NSString *) chordsName;
 @end
 
 /*

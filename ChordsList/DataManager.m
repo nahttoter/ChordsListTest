@@ -13,7 +13,7 @@ NSString * const DataManagerDidSaveFailedNotification = @"DataManagerDidSaveFail
 
 #define  decoysPhotosCount 4
 #define  videosSec 1
-
+#define kChordEntityName @"Chord"
 
 @interface DataManager ()
 
@@ -32,7 +32,78 @@ NSString * const kDataManagerBundleName = @"ChordsList";
 NSString * const kDataManagerModelName = @"ChordsDBModel";
 NSString * const kDataManagerSQLiteName = @"ChordsDBModel.sqlite";
 
+#pragma mark parsing to DB methods
 
+-(void) findOrAddChordFromDict:(NSDictionary *)chordDict
+{
+    
+    //check if chord already in DB
+    NSString *idChord=[chordDict objectOrNilForKey:@"id"];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:kChordEntityName] ;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat: @"(idChord = %@)",idChord];
+    [fetchRequest setPredicate:predicate];
+    NSError *error=nil;
+    
+    if ([self.mainObjectContext countForFetchRequest:fetchRequest error:&error]) {
+        //chord already in DB, do nothing
+        //NSLog(@"Already in db");
+    }
+    else
+    {
+        Chord *newChord =(Chord *)[NSEntityDescription insertNewObjectForEntityForName:kChordEntityName inManagedObjectContext:self.mainObjectContext];
+        [newChord updateChordWithDictionary:chordDict];
+        
+    }
+    
+    if (error) {
+        NSLog(@"Error fetching by chordId %@",error.description);
+    }
+   
+}
+
+- (void) savingParseResultFrom:(NSDictionary *) chordsJSONDictionary
+{
+    self.setOfChordsName=[[NSMutableSet alloc] init];
+    
+    //parsing all chord and saving to coredata
+    for (NSDictionary *chordDict in chordsJSONDictionary) {
+     
+        [self findOrAddChordFromDict:chordDict];
+        
+        //creating set of chords name for table view, exlidung names, which already in set
+        NSString *chordNameStr=[chordDict objectOrNilForKey:@"name"];
+        if (![self.setOfChordsName containsObject:chordNameStr]) {
+            [self.setOfChordsName addObject:chordNameStr];
+        }      
+        
+    }
+    //NSLog(@"Names %@ %d",self.setOfChordsName,[self.setOfChordsName count]);
+    
+    [self save];
+    NSLog(@"Saving chords finished");
+}
+
+-(NSArray *) fetchSpecificChordsByName:(NSString *) chordsName
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:kChordEntityName] ;
+    
+    //check if contact already in db
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"priority" ascending:YES];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"(name = %@)",chordsName];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError *error=nil;
+    NSArray *fetchedChords = [self.mainObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if (error) {
+        NSLog(@"Error fetching chords %@",error.description);
+    }
+    
+    return fetchedChords;
+    
+}
 
 #pragma mark Coredata Singletone Methods
 + (DataManager*)sharedInstance {
@@ -154,31 +225,7 @@ NSString * const kDataManagerSQLiteName = @"ChordsDBModel.sqlite";
     
 	return ctx;
 }
-#pragma mark parsing to DB methods
 
-- (void) savingParseResultFrom:(NSDictionary *) chordsJSONDictionary
-{
-    self.setOfChordsName=[[NSMutableSet alloc] init];
-    
-    //parsing all chord and saving to coredata
-    for (NSDictionary *chordDict in chordsJSONDictionary) {
-        
-        Chord *newChord =(Chord *)[NSEntityDescription insertNewObjectForEntityForName:@"Chord" inManagedObjectContext:self.mainObjectContext];
-        [newChord updateChordWithDictionary:chordDict];
-        //NSLog(@"%@ saving hord, succes %d",newChord,[self save]);
-        
-        //creating set of chords name for table view, exlidung names, which already in set
-        NSString *chordNameStr=[chordDict objectOrNilForKey:@"name"];
-        if (![self.setOfChordsName containsObject:chordNameStr]) {
-            [self.setOfChordsName addObject:chordNameStr];
-        }
-        
-            
-    }
-    NSLog(@"Names %@ %d",self.setOfChordsName,[self.setOfChordsName count]);
-    
-    [self save];
-}
 /*
 -(void) updateContactID:(int) idRecip
                withName:(NSString *) nameStr

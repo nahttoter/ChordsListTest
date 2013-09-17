@@ -2,7 +2,7 @@
 //  Chord.m
 //  ChordsList
 //
-//  Created by Dmitry on 16.09.13.
+//  Created by Dmitry on 17.09.13.
 //  Copyright (c) 2013 Dmitiy. All rights reserved.
 //
 
@@ -17,6 +17,9 @@
 @dynamic priority;
 @dynamic scheme;
 @dynamic type;
+@dynamic barre;
+@dynamic fret;
+
 
 -(void) updateChordWithDictionary:(NSDictionary *) chordDictionary
 {
@@ -26,6 +29,32 @@
     self.priority= [chordDictionary objectOrNilForKey:@"priority"];
     self.scheme  = [chordDictionary objectOrNilForKey:@"scheme"];
     self.type    = [chordDictionary objectOrNilForKey:@"type"];
+  
+    if (self.scheme) {
+        [self calculateFret];  
+    }
+    
+}
+
+//in my logic - fret lowest value in scheme, except 0 and X
+-(void) calculateFret
+{
+    NSArray *schemeArr=[self.scheme componentsSeparatedByString:@" "];;  
+    NSNumber *lowestNumber= [schemeArr valueForKeyPath:@"@max.intValue"];
+    int lowestInt=[lowestNumber integerValue];
+
+    NSInteger numberIndex;
+    for (NSNumber *theNumber in schemeArr)
+    {
+        if ( (lowestInt > [theNumber integerValue]) && ([theNumber integerValue] > 0) ) {
+            lowestInt = [theNumber integerValue];
+            numberIndex = [schemeArr indexOfObject:theNumber];
+        }
+    }
+    
+    self.fret=[NSNumber numberWithInt:lowestInt];
+    
+    //NSLog(@"Highest number: %d at index: %d", lowestInt, numberIndex);
 }
 
 @end

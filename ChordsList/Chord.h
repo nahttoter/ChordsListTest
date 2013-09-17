@@ -2,7 +2,7 @@
 //  Chord.h
 //  ChordsList
 //
-//  Created by Dmitry on 16.09.13.
+//  Created by Dmitry on 17.09.13.
 //  Copyright (c) 2013 Dmitiy. All rights reserved.
 //
 
@@ -18,7 +18,8 @@
 @property (nonatomic, retain) NSNumber * priority;
 @property (nonatomic, retain) NSString * scheme;
 @property (nonatomic, retain) NSString * type;
-
+@property (nonatomic, retain) NSNumber * barre;
+@property (nonatomic, retain) NSNumber * fret;
 -(void) updateChordWithDictionary:(NSDictionary *) chordDictionary;
 
 @end

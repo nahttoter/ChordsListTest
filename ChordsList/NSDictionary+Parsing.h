@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface NSDictionary (Parsing)
++(NSDictionary*) dictionaryWithContentsOfJSONString:(NSString*)fileLocation;
 - (id)objectOrNilForKey:(id)aKey;
 @end

@@ -10,7 +10,7 @@
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+-(void) setupApplication
 {
     // Create a 4MB in-memory, 32MB disk cache
     NSURLCache *cache = [[NSURLCache alloc] initWithMemoryCapacity:4*1024*1024
@@ -19,6 +19,13 @@
     
     // Set the shared cache to our new instance
     [NSURLCache setSharedURLCache:cache];
+
+    
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [self setupApplication];
     
     //[ApiServiceInstance addInternetCheckerObserver];
         // Override point for customization after application launch.
