@@ -10,6 +10,7 @@
 #import "iCarousel.h"
 #import "Chord.h"
 #import "SmallSchemeView.h"
+
 @interface SelectedChordVC : UIViewController<iCarouselDataSource, iCarouselDelegate>
 
 @property (nonatomic, retain) IBOutlet iCarousel *carousel;

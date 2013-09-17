@@ -14,5 +14,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *schemeLbl;
 
 -(void) createMarkerAtCenter:(CGPoint) centerPoint withRadius:(int) radius;
+-(void) createBarreAtStartPoint:(CGPoint) centerPoint andRadius:(int) radius withWidth:(int) width;
 
 @end

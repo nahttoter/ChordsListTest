@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="B75-Pq-6qO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="B75-Pq-6qO">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -12,7 +12,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="usi-eg-E7U">
-                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="436" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
@@ -23,12 +23,12 @@
             </objects>
             <point key="canvasLocation" x="-197" y="-118"/>
         </scene>
-        <!--Chords List TableVC - Chords Diagram-->
+        <!--Chords List TableVC - Chords List-->
         <scene sceneID="NsK-Td-i9G">
             <objects>
                 <tableViewController id="sLH-Ou-IRP" customClass="ChordsListTableVC" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="yZ7-ZB-ka4">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="8ep-35-858">
@@ -55,7 +55,7 @@
                             <outlet property="delegate" destination="sLH-Ou-IRP" id="4pc-xq-BXL"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Chords Diagram" id="OMc-Nj-QCm"/>
+                    <navigationItem key="navigationItem" title="Chords List" id="OMc-Nj-QCm"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="buf-PT-L26" id="W3m-eK-Tbq"/>
@@ -88,25 +88,24 @@
             <objects>
                 <viewController id="Duv-jk-H0I" customClass="SelectedChordVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FfU-ej-qMF">
-                        <rect key="frame" x="0.0" y="64" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" image="frets.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="1J3-Hs-ljl">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="237" id="4tp-VH-erz"/>
-                                </constraints>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" image="frets.jpg" id="1J3-Hs-ljl">
+                                <rect key="frame" x="-13" y="0.0" width="237" height="372"/>
+                                <autoresizingMask key="autoresizingMask"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xqd-Wu-EqM" userLabel="iCarousel" customClass="iCarousel">
+                            <view contentMode="scaleToFill" id="xqd-Wu-EqM" userLabel="iCarousel" customClass="iCarousel">
+                                <rect key="frame" x="222" y="32" width="99" height="310"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Duv-jk-H0I" id="aWP-eL-6va"/>
                                     <outlet property="delegate" destination="Duv-jk-H0I" id="SfV-yg-RCO"/>
                                 </connections>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vm0-5p-d5Q">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="97" id="65z-wi-Dqm"/>
-                                </constraints>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Vm0-5p-d5Q">
+                                <rect key="frame" x="223" y="0.0" width="97" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Button" image="key_up.jpg">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -116,7 +115,8 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p7Z-i2-FYd">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="p7Z-i2-FYd">
+                                <rect key="frame" x="223" y="336" width="97" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Button" image="key_down.jpg">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -126,18 +126,16 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="876" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="swq-lX-svp">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="75" id="T2z-6v-hhM"/>
-                                </constraints>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="876" text="Chord" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="swq-lX-svp">
+                                <rect key="frame" x="48" y="346" width="75" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0zU-fG-DGj">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="36" id="BMu-DN-YGe"/>
-                                </constraints>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0zU-fG-DGj">
+                                <rect key="frame" x="128" y="338" width="36" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Button" image="play-icon.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -149,25 +147,6 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.14079483695652173" green="0.14079483695652173" blue="0.14079483695652173" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="xqd-Wu-EqM" firstAttribute="centerX" secondItem="p7Z-i2-FYd" secondAttribute="centerX" type="default" id="2Hh-ac-dvf"/>
-                            <constraint firstItem="1J3-Hs-ljl" firstAttribute="bottom" secondItem="FfU-ej-qMF" secondAttribute="bottom" type="default" id="5fC-EF-US8"/>
-                            <constraint firstItem="1J3-Hs-ljl" firstAttribute="top" secondItem="FfU-ej-qMF" secondAttribute="top" type="default" id="B9H-9x-GJa"/>
-                            <constraint firstItem="0zU-fG-DGj" firstAttribute="leading" secondItem="FfU-ej-qMF" secondAttribute="leading" constant="128" id="BNo-2M-crR"/>
-                            <constraint firstItem="swq-lX-svp" firstAttribute="centerY" secondItem="0zU-fG-DGj" secondAttribute="centerY" type="default" id="C70-RW-BOB"/>
-                            <constraint firstItem="0zU-fG-DGj" firstAttribute="top" secondItem="FfU-ej-qMF" secondAttribute="top" constant="338" id="G6Y-x6-tNj"/>
-                            <constraint firstItem="swq-lX-svp" firstAttribute="left" secondItem="FfU-ej-qMF" secondAttribute="left" constant="48" type="user" id="GrG-zE-CW4"/>
-                            <constraint firstItem="xqd-Wu-EqM" firstAttribute="top" secondItem="FfU-ej-qMF" secondAttribute="top" constant="32" id="KY2-XS-xx8"/>
-                            <constraint firstItem="p7Z-i2-FYd" firstAttribute="trailing" secondItem="FfU-ej-qMF" secondAttribute="trailing" type="default" id="Odn-FB-f1g"/>
-                            <constraint firstItem="Vm0-5p-d5Q" firstAttribute="leading" secondItem="p7Z-i2-FYd" secondAttribute="leading" type="default" id="UKN-rQ-TSL"/>
-                            <constraint firstItem="1J3-Hs-ljl" firstAttribute="leading" secondItem="FfU-ej-qMF" secondAttribute="leading" constant="-11" id="i33-2U-A3c"/>
-                            <constraint firstItem="swq-lX-svp" firstAttribute="baseline" secondItem="0zU-fG-DGj" secondAttribute="baseline" type="default" id="kdc-Js-adE"/>
-                            <constraint firstItem="Vm0-5p-d5Q" firstAttribute="trailing" secondItem="FfU-ej-qMF" secondAttribute="trailing" type="default" id="mlU-sp-qiM"/>
-                            <constraint firstItem="p7Z-i2-FYd" firstAttribute="bottom" secondItem="FfU-ej-qMF" secondAttribute="bottom" type="default" id="rrb-9z-isD"/>
-                            <constraint firstItem="xqd-Wu-EqM" firstAttribute="leading" secondItem="FfU-ej-qMF" secondAttribute="leading" constant="222" id="wOp-oU-S3J"/>
-                            <constraint firstAttribute="bottom" secondItem="xqd-Wu-EqM" secondAttribute="bottom" constant="30" id="wQi-1r-ELj"/>
-                            <constraint firstItem="Vm0-5p-d5Q" firstAttribute="top" secondItem="FfU-ej-qMF" secondAttribute="top" type="default" id="y5K-R9-YLD"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="CoV-ps-5sy"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
@@ -187,34 +166,9 @@
         <image name="key_up.jpg" width="141" height="36"/>
         <image name="play-icon.png" width="36" height="36"/>
     </resources>
-    <classes>
-        <class className="ChordsListTableVC" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChordsListTableVC.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="SelectedChordVC" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SelectedChordVC.h"/>
-            <relationships>
-                <relationship kind="outlet" name="carousel" candidateClass="iCarousel"/>
-                <relationship kind="outlet" name="chordNameLbl" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="iCarousel" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/iCarousel.h"/>
-            <relationships>
-                <relationship kind="outlet" name="dataSource"/>
-                <relationship kind="outlet" name="delegate"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
 </document>

@@ -41,42 +41,71 @@
     Chord *lastChord=(Chord *)[self.selectedChordArray lastObject];
     self.navigationItem.title=lastChord.name;
     self.chordNameLbl.text=lastChord.name;
+    
+    [self.carousel scrollToItemAtIndex:0 animated:0];
+    
     //navItem.title = @"Custom";
-
 }
 
-#pragma mark -
-#pragma mark iCarousel methods
-
+#pragma mark Guitar Logic
 -(void) setMarkersCentersByChord:(Chord *) selectedChord inView:(SmallSchemeView *) view
 {
-    
-    NSArray *schemeArr=[selectedChord.scheme componentsSeparatedByString:@" "];
-    
-    int fretY=0,stringX=0; // counter of strings, 0- 6th string, 5th - first string
+    // counter of strings, 0- 6th string, 5th - first string
+    int fretY=0,stringX=0;
     int shiftX=10,shiftY=12,startX=16,startY=40 ;
-    
     int radius=5;
     
-    for (NSString *fert in schemeArr) {
+    //detect barre, counting first finger
+    BOOL hasBarre=NO, barreDrawed=YES;
+    int barreStartPos, barreEndPos;
+    if (selectedChord.fingers)
+    {
         
-        if ([fert isEqualToString:@"X"]) {
+        int firstFingerCount = [selectedChord.fingers length] - [[selectedChord.fingers stringByReplacingOccurrencesOfString:@"1" withString:@""] length];
+        NSLog(@"fing1 count %d",firstFingerCount);
+        if (firstFingerCount>1) {
+            NSString *justFingerNumberStr=[selectedChord.fingers stringByReplacingOccurrencesOfString:@" " withString:@""];
+            hasBarre=YES;
+            barreDrawed=NO;
+            
+            barreStartPos=[justFingerNumberStr rangeOfString:@"1" options:NSLiteralSearch].location;
+            barreEndPos=[justFingerNumberStr rangeOfString:@"1" options:NSBackwardsSearch].location;
+            NSLog(@"Barre start %d end %d",barreStartPos,barreEndPos);
+            
+            //draw barre
+            CGPoint startBarrePoint=CGPointMake(startX + barreStartPos*shiftX, startY+fretY*shiftY);
+            [view createBarreAtStartPoint:startBarrePoint andRadius:radius withWidth:(barreEndPos-barreStartPos+1)*shiftX];
+        }
+    }
+    
+    NSArray *schemeArr=[selectedChord.scheme componentsSeparatedByString:@" "];
+    NSLog(@"scheme array %@",schemeArr);
+    
+    for (NSString *fretEnum in schemeArr) {
+        
+        if ([fretEnum isEqualToString:@"X"] || [fretEnum isEqualToString:@"x"]) {
             fretY=0;
             //CGPoint centerPoint=CGPointMake(startX + stringX*shiftX, startY+fretY*shiftY);
             //[view createMarkerAtCenter:centerPoint withRadius:0];
         }
-        else if ([fert isEqualToString:@"0"])
+        else if ([fretEnum isEqualToString:@"0"])
         {
             CGPoint centerPoint=CGPointMake(startX + stringX*shiftX, startY-shiftY/2);
             [view createMarkerAtCenter:centerPoint withRadius:2];
             
         }
-        else
+        else if ([fretEnum integerValue])
         {
-            int startPos = [selectedChord.fret integerValue];
-            fretY = [[schemeArr objectAtIndex:stringX] integerValue] - startPos;
-            CGPoint centerPoint=CGPointMake(startX + stringX*shiftX, startY+fretY*shiftY);
-            [view createMarkerAtCenter:centerPoint withRadius:radius];
+            if (hasBarre && ([fretEnum integerValue] == selectedChord.fret.integerValue)) {
+                //skip barre finger
+            }
+            else
+            {
+                int startPos = [selectedChord.fret integerValue];
+                fretY = [[schemeArr objectAtIndex:stringX] integerValue] - startPos;
+                CGPoint centerPoint=CGPointMake(startX + stringX*shiftX, startY+fretY*shiftY);
+                [view createMarkerAtCenter:centerPoint withRadius:radius];
+            }
         }
         
         stringX++;
@@ -89,6 +118,10 @@
 {
     return [selectedChordArray count];
 }
+
+
+#pragma mark iCarousel methods
+
 
 -(UIView *) createSmallSchemeAtIndex:(NSUInteger)index
 {
@@ -124,16 +157,6 @@
 {
     
     return nil;//[self createSmallSchemeAtIndex:index];
-    
-	//create a placeholder view
-//	UIView *view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"page.png"]];
-//	UILabel *label = [[UILabel alloc] initWithFrame:view.bounds] ;
-//	label.text = (index == 0)? @"[": @"]";
-//	label.backgroundColor = [UIColor clearColor];
-//	label.textAlignment = UITextAlignmentCenter;
-//	label.font = [label.font fontWithSize:12];
-//	[view addSubview:label];
-//	return view;
 }
 
 - (NSUInteger)numberOfVisibleItemsInCarousel:(iCarousel *)carousel
@@ -201,6 +224,10 @@
 
 - (void)carousel:(iCarousel *)_carousel didSelectItemAtIndex:(NSInteger)index
 {
+    
+    UIView *currentView=[self.carousel itemViewAtIndex:index];
+    currentView.layer.shadowOpacity=0.5;
+    
 	if (index == carousel.currentItemIndex)
 	{
 		//note, this will only ever happen if USE_BUTTONS == NO
