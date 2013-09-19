@@ -12,14 +12,14 @@
 
 @interface Chord : NSManagedObject
 
-@property (nonatomic, retain) NSString * fingers;
-@property (nonatomic, retain) NSNumber * idChord;
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSNumber * priority;
-@property (nonatomic, retain) NSString * scheme;
-@property (nonatomic, retain) NSString * type;
-@property (nonatomic, retain) NSNumber * barre;
-@property (nonatomic, retain) NSNumber * fret;
+@property (nonatomic, assign) NSString * fingers;
+@property (nonatomic, assign) NSNumber * idChord;
+@property (nonatomic, assign) NSString * name;
+@property (nonatomic, assign) NSNumber * priority;
+@property (nonatomic, assign) NSString * scheme;
+@property (nonatomic, assign) NSString * type;
+@property (nonatomic, assign) NSNumber * barre;
+@property (nonatomic, assign) NSNumber * fret;
 -(void) updateChordWithDictionary:(NSDictionary *) chordDictionary;
 
 @end

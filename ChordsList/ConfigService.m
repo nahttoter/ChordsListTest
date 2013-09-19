@@ -11,6 +11,15 @@
 
 @synthesize values = _values;
 
++ (ConfigService *)sharedInstance {
+    static ConfigService *__sharedInstance;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        __sharedInstance = [[ConfigService alloc] init];
+    });
+    
+    return __sharedInstance;
+}
 
 - (ConfigService *) init
 {

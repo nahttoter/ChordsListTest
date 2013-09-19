@@ -1021,6 +1021,7 @@ NSInteger compareViewDepth(id obj1, id obj2, void *context)
 - (void)scrollToItemAtIndex:(NSInteger)index animated:(BOOL)animated
 {	
 	[self scrollToItemAtIndex:index duration:animated? SCROLL_DURATION: 0];
+    
 }
 
 - (void)removeItemAtIndex:(NSInteger)index animated:(BOOL)animated

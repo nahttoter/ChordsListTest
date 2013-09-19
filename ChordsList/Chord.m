@@ -42,19 +42,15 @@
     NSArray *schemeArr=[self.scheme componentsSeparatedByString:@" "];;  
     NSNumber *lowestNumber= [schemeArr valueForKeyPath:@"@max.intValue"];
     int lowestInt=[lowestNumber integerValue];
-
-    NSInteger numberIndex;
     for (NSNumber *theNumber in schemeArr)
     {
-        if ( (lowestInt > [theNumber integerValue]) && ([theNumber integerValue] > 0) ) {
+        if ( (lowestInt > [theNumber integerValue]) && ([theNumber integerValue] > 0) )
+        {
             lowestInt = [theNumber integerValue];
-            numberIndex = [schemeArr indexOfObject:theNumber];
-        }
+            }
     }
-    
     self.fret=[NSNumber numberWithInt:lowestInt];
-    
-    //NSLog(@"Highest number: %d at index: %d", lowestInt, numberIndex);
+
 }
 
 @end

@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A09FDCA17E9CE3100A06DDB /* UIView+DrawGuitarMarkers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A09FDC917E9CE3100A06DDB /* UIView+DrawGuitarMarkers.m */; };
+		0A09FDD317E9DA9B00A06DDB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A09FDD217E9DA9A00A06DDB /* AudioToolbox.framework */; };
 		0A0BD21917E8810B00D54DFA /* Chord.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0BD21817E8810B00D54DFA /* Chord.m */; };
 		0A0BD21A17E8825900D54DFA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0C5D7317E733F700EC0067 /* CoreData.framework */; };
 		0A0BD22017E8828600D54DFA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0BD21F17E8828600D54DFA /* QuartzCore.framework */; };
 		0A0BD22317E885B700D54DFA /* chordDiagrams.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A0BD22217E885B700D54DFA /* chordDiagrams.json */; };
 		0A0BD22817E88B9000D54DFA /* frets@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A0BD22417E88B9000D54DFA /* frets@2x.jpg */; };
-		0A0BD22917E88B9000D54DFA /* key_down.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A0BD22517E88B9000D54DFA /* key_down.jpg */; };
-		0A0BD22A17E88B9000D54DFA /* key_up.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A0BD22617E88B9000D54DFA /* key_up.jpg */; };
 		0A0BD22B17E88B9000D54DFA /* small_scheme.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A0BD22717E88B9000D54DFA /* small_scheme.jpg */; };
 		0A0BD22D17E88C2000D54DFA /* frets.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A0BD22C17E88C2000D54DFA /* frets.jpg */; };
 		0A0BD22F17E88D4A00D54DFA /* small_scheme@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A0BD22E17E88D4A00D54DFA /* small_scheme@2x.jpg */; };
@@ -23,6 +23,15 @@
 		0A0BD23917E8ADEE00D54DFA /* play-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A0BD23717E8ADEE00D54DFA /* play-icon@2x.png */; };
 		0A0C5D7E17E73D9000EC0067 /* NSDictionary+Parsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0C5D7D17E73D9000EC0067 /* NSDictionary+Parsing.m */; };
 		0A0C5D8217E7410A00EC0067 /* ChordsListTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0C5D8117E7410A00EC0067 /* ChordsListTableVC.m */; };
+		0AFDBD7617EAF59C00090EFB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AFDBD7517EAF59C00090EFB /* SystemConfiguration.framework */; };
+		0AFDBD7817EAF5A000090EFB /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AFDBD7717EAF5A000090EFB /* MobileCoreServices.framework */; };
+		0AFDBD7A17EAF6C500090EFB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A09FDCE17E9CF6E00A06DDB /* AVFoundation.framework */; };
+		0AFDBD8217EB3E6900090EFB /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AFDBD8117EB3E6900090EFB /* icon.png */; };
+		0AFDBD8B17EB3F2C00090EFB /* icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AFDBD8A17EB3F2C00090EFB /* icon114.png */; };
+		0AFDBD9017EB410200090EFB /* NSData+SSToolkitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFDBD8D17EB410200090EFB /* NSData+SSToolkitAdditions.m */; };
+		0AFDBD9717EB41A700090EFB /* chordsArray.dat in Resources */ = {isa = PBXBuildFile; fileRef = 0AFDBD9317EB41A300090EFB /* chordsArray.dat */; };
+		0AFDBD9817EB41A700090EFB /* ChordsDBModel.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 0AFDBD9417EB41A400090EFB /* ChordsDBModel.sqlite */; };
+		0AFDBD9A17EB41A700090EFB /* test.dat in Resources */ = {isa = PBXBuildFile; fileRef = 0AFDBD9617EB41A500090EFB /* test.dat */; };
 		9B8FFA5717E79761007FE4B4 /* SelectedChordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B8FFA5617E79761007FE4B4 /* SelectedChordVC.m */; };
 		9B8FFA5F17E797BA007FE4B4 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B8FFA5E17E797BA007FE4B4 /* iCarousel.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9B9B945517E5D45B0025DD99 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B9B945417E5D45B0025DD99 /* UIKit.framework */; };
@@ -69,13 +78,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A09FDC817E9CE3100A06DDB /* UIView+DrawGuitarMarkers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DrawGuitarMarkers.h"; sourceTree = "<group>"; };
+		0A09FDC917E9CE3100A06DDB /* UIView+DrawGuitarMarkers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DrawGuitarMarkers.m"; sourceTree = "<group>"; };
+		0A09FDCE17E9CF6E00A06DDB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		0A09FDD017E9D2C300A06DDB /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		0A09FDD217E9DA9A00A06DDB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0A0BD21717E8810B00D54DFA /* Chord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chord.h; sourceTree = "<group>"; };
 		0A0BD21817E8810B00D54DFA /* Chord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chord.m; sourceTree = "<group>"; };
 		0A0BD21F17E8828600D54DFA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0A0BD22217E885B700D54DFA /* chordDiagrams.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = chordDiagrams.json; path = Resources/chordDiagrams.json; sourceTree = "<group>"; };
 		0A0BD22417E88B9000D54DFA /* frets@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "frets@2x.jpg"; path = "Resources/frets@2x.jpg"; sourceTree = "<group>"; };
-		0A0BD22517E88B9000D54DFA /* key_down.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = key_down.jpg; path = Resources/key_down.jpg; sourceTree = "<group>"; };
-		0A0BD22617E88B9000D54DFA /* key_up.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = key_up.jpg; path = Resources/key_up.jpg; sourceTree = "<group>"; };
 		0A0BD22717E88B9000D54DFA /* small_scheme.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = small_scheme.jpg; path = Resources/small_scheme.jpg; sourceTree = "<group>"; };
 		0A0BD22C17E88C2000D54DFA /* frets.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = frets.jpg; path = Resources/frets.jpg; sourceTree = "<group>"; };
 		0A0BD22E17E88D4A00D54DFA /* small_scheme@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "small_scheme@2x.jpg"; path = "Resources/small_scheme@2x.jpg"; sourceTree = "<group>"; };
@@ -89,6 +101,15 @@
 		0A0C5D7D17E73D9000EC0067 /* NSDictionary+Parsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Parsing.m"; sourceTree = "<group>"; };
 		0A0C5D8017E7410A00EC0067 /* ChordsListTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChordsListTableVC.h; sourceTree = "<group>"; };
 		0A0C5D8117E7410A00EC0067 /* ChordsListTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChordsListTableVC.m; sourceTree = "<group>"; };
+		0AFDBD7517EAF59C00090EFB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		0AFDBD7717EAF5A000090EFB /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		0AFDBD8117EB3E6900090EFB /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		0AFDBD8A17EB3F2C00090EFB /* icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114.png; sourceTree = "<group>"; };
+		0AFDBD8C17EB410200090EFB /* NSData+SSToolkitAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+SSToolkitAdditions.h"; sourceTree = "<group>"; };
+		0AFDBD8D17EB410200090EFB /* NSData+SSToolkitAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+SSToolkitAdditions.m"; sourceTree = "<group>"; };
+		0AFDBD9317EB41A300090EFB /* chordsArray.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = chordsArray.dat; path = Resources/chordsArray.dat; sourceTree = "<group>"; };
+		0AFDBD9417EB41A400090EFB /* ChordsDBModel.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = ChordsDBModel.sqlite; path = Resources/ChordsDBModel.sqlite; sourceTree = "<group>"; };
+		0AFDBD9617EB41A500090EFB /* test.dat */ = {isa = PBXFileReference; lastKnownFileType = file; name = test.dat; path = Resources/test.dat; sourceTree = "<group>"; };
 		391EB7E665C64FA4B2DB1092 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B8FFA5517E79761007FE4B4 /* SelectedChordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectedChordVC.h; sourceTree = "<group>"; };
 		9B8FFA5617E79761007FE4B4 /* SelectedChordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectedChordVC.m; sourceTree = "<group>"; };
@@ -98,7 +119,6 @@
 		9B9B945417E5D45B0025DD99 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9B9B945617E5D45B0025DD99 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9B9B945817E5D45B0025DD99 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		9B9B945C17E5D45B0025DD99 /* ChordsList-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ChordsList-Info.plist"; sourceTree = "<group>"; };
 		9B9B945E17E5D45B0025DD99 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9B9B946017E5D45B0025DD99 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9B9B946217E5D45B0025DD99 /* ChordsList-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ChordsList-Prefix.pch"; sourceTree = "<group>"; };
@@ -127,6 +147,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AFDBD7A17EAF6C500090EFB /* AVFoundation.framework in Frameworks */,
+				0AFDBD7817EAF5A000090EFB /* MobileCoreServices.framework in Frameworks */,
+				0AFDBD7617EAF59C00090EFB /* SystemConfiguration.framework in Frameworks */,
+				0A09FDD317E9DA9B00A06DDB /* AudioToolbox.framework in Frameworks */,
 				0A0BD22017E8828600D54DFA /* QuartzCore.framework in Frameworks */,
 				0A0BD21A17E8825900D54DFA /* CoreData.framework in Frameworks */,
 				9B9B945517E5D45B0025DD99 /* UIKit.framework in Frameworks */,
@@ -142,13 +166,14 @@
 		0A0BD22117E885A900D54DFA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0AFDBD9317EB41A300090EFB /* chordsArray.dat */,
+				0AFDBD9417EB41A400090EFB /* ChordsDBModel.sqlite */,
+				0AFDBD9617EB41A500090EFB /* test.dat */,
 				0A0BD23617E8ADEE00D54DFA /* play-icon.png */,
 				0A0BD23717E8ADEE00D54DFA /* play-icon@2x.png */,
 				0A0BD22E17E88D4A00D54DFA /* small_scheme@2x.jpg */,
 				0A0BD22C17E88C2000D54DFA /* frets.jpg */,
 				0A0BD22417E88B9000D54DFA /* frets@2x.jpg */,
-				0A0BD22517E88B9000D54DFA /* key_down.jpg */,
-				0A0BD22617E88B9000D54DFA /* key_up.jpg */,
 				0A0BD22717E88B9000D54DFA /* small_scheme.jpg */,
 				0A0BD22217E885B700D54DFA /* chordDiagrams.json */,
 			);
@@ -180,26 +205,36 @@
 		0A0C5D7F17E740E100EC0067 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				0A0BD22117E885A900D54DFA /* Resources */,
 				0A0C5D8017E7410A00EC0067 /* ChordsListTableVC.h */,
 				0A0C5D8117E7410A00EC0067 /* ChordsListTableVC.m */,
 				9B8FFA5517E79761007FE4B4 /* SelectedChordVC.h */,
 				9B8FFA5617E79761007FE4B4 /* SelectedChordVC.m */,
-				0A0BD23517E8A86200D54DFA /* SmallSchemeView */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		9B8FFA5C17E797A8007FE4B4 /* AdditionalClasses */ = {
+		0AFDBD9217EB410C00090EFB /* SSToolkit */ = {
+			isa = PBXGroup;
+			children = (
+				0AFDBD8C17EB410200090EFB /* NSData+SSToolkitAdditions.h */,
+				0AFDBD8D17EB410200090EFB /* NSData+SSToolkitAdditions.m */,
+				9B9B948717E6173E0025DD99 /* NSString+SSToolkitAdditions.h */,
+				9B9B948817E6173E0025DD99 /* NSString+SSToolkitAdditions.m */,
+			);
+			name = SSToolkit;
+			sourceTree = "<group>";
+		};
+		9B8FFA5C17E797A8007FE4B4 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
 				9B8FFA6017E797BF007FE4B4 /* iCarousel */,
-				9B9B948717E6173E0025DD99 /* NSString+SSToolkitAdditions.h */,
-				9B9B948817E6173E0025DD99 /* NSString+SSToolkitAdditions.m */,
+				0AFDBD9217EB410C00090EFB /* SSToolkit */,
 				0A0C5D7C17E73D9000EC0067 /* NSDictionary+Parsing.h */,
 				0A0C5D7D17E73D9000EC0067 /* NSDictionary+Parsing.m */,
+				0A09FDC817E9CE3100A06DDB /* UIView+DrawGuitarMarkers.h */,
+				0A09FDC917E9CE3100A06DDB /* UIView+DrawGuitarMarkers.m */,
 			);
-			name = AdditionalClasses;
+			name = Libs;
 			sourceTree = "<group>";
 		};
 		9B8FFA6017E797BF007FE4B4 /* iCarousel */ = {
@@ -214,7 +249,7 @@
 		9B9B944817E5D45B0025DD99 = {
 			isa = PBXGroup;
 			children = (
-				0A0BD21F17E8828600D54DFA /* QuartzCore.framework */,
+				0AFDBD8A17EB3F2C00090EFB /* icon114.png */,
 				9B9B945A17E5D45B0025DD99 /* ChordsList */,
 				9B9B945317E5D45B0025DD99 /* Frameworks */,
 				9B9B945217E5D45B0025DD99 /* Products */,
@@ -233,6 +268,12 @@
 		9B9B945317E5D45B0025DD99 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0AFDBD7717EAF5A000090EFB /* MobileCoreServices.framework */,
+				0AFDBD7517EAF59C00090EFB /* SystemConfiguration.framework */,
+				0A09FDD217E9DA9A00A06DDB /* AudioToolbox.framework */,
+				0A09FDD017E9D2C300A06DDB /* MediaPlayer.framework */,
+				0A09FDCE17E9CF6E00A06DDB /* AVFoundation.framework */,
+				0A0BD21F17E8828600D54DFA /* QuartzCore.framework */,
 				0A0C5D7317E733F700EC0067 /* CoreData.framework */,
 				9B9B945417E5D45B0025DD99 /* UIKit.framework */,
 				9B9B945617E5D45B0025DD99 /* Foundation.framework */,
@@ -246,13 +287,13 @@
 			isa = PBXGroup;
 			children = (
 				9B9B949017E62F000025DD99 /* Pods.xcodeproj */,
-				9B8FFA5C17E797A8007FE4B4 /* AdditionalClasses */,
+				9B8FFA5C17E797A8007FE4B4 /* Libs */,
+				0A0C5D7517E73AA100EC0067 /* DataModel */,
 				9B9B947B17E6139C0025DD99 /* Network */,
 				9B9B946317E5D45B0025DD99 /* AppDelegate.h */,
 				9B9B946417E5D45B0025DD99 /* AppDelegate.m */,
-				9B9B946C17E5D45B0025DD99 /* MainStoryboard.storyboard */,
+				9BCF3C5417EB7B120076AA66 /* View */,
 				0A0C5D7F17E740E100EC0067 /* Controllers */,
-				0A0C5D7517E73AA100EC0067 /* DataModel */,
 				9B9B945B17E5D45B0025DD99 /* Supporting Files */,
 			);
 			path = ChordsList;
@@ -261,13 +302,14 @@
 		9B9B945B17E5D45B0025DD99 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				9B9B945C17E5D45B0025DD99 /* ChordsList-Info.plist */,
+				0A0BD22117E885A900D54DFA /* Resources */,
 				9B9B945D17E5D45B0025DD99 /* InfoPlist.strings */,
 				9B9B946017E5D45B0025DD99 /* main.m */,
 				9B9B946217E5D45B0025DD99 /* ChordsList-Prefix.pch */,
 				9B9B946617E5D45B0025DD99 /* Default.png */,
 				9B9B946817E5D45B0025DD99 /* Default@2x.png */,
 				9B9B946A17E5D45B0025DD99 /* Default-568h@2x.png */,
+				0AFDBD8117EB3E6900090EFB /* icon.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -292,6 +334,15 @@
 				9B9B949E17E62F000025DD99 /* libPods.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		9BCF3C5417EB7B120076AA66 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0A0BD23517E8A86200D54DFA /* SmallSchemeView */,
+				9B9B946C17E5D45B0025DD99 /* MainStoryboard.storyboard */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -385,14 +436,17 @@
 				9B9B948217E613B70025DD99 /* config.plist in Resources */,
 				0A0BD22317E885B700D54DFA /* chordDiagrams.json in Resources */,
 				0A0BD22817E88B9000D54DFA /* frets@2x.jpg in Resources */,
-				0A0BD22917E88B9000D54DFA /* key_down.jpg in Resources */,
-				0A0BD22A17E88B9000D54DFA /* key_up.jpg in Resources */,
 				0A0BD22B17E88B9000D54DFA /* small_scheme.jpg in Resources */,
 				0A0BD22D17E88C2000D54DFA /* frets.jpg in Resources */,
 				0A0BD22F17E88D4A00D54DFA /* small_scheme@2x.jpg in Resources */,
 				0A0BD23117E8A4A600D54DFA /* smallSchemeView.xib in Resources */,
 				0A0BD23817E8ADEE00D54DFA /* play-icon.png in Resources */,
 				0A0BD23917E8ADEE00D54DFA /* play-icon@2x.png in Resources */,
+				0AFDBD8217EB3E6900090EFB /* icon.png in Resources */,
+				0AFDBD8B17EB3F2C00090EFB /* icon114.png in Resources */,
+				0AFDBD9717EB41A700090EFB /* chordsArray.dat in Resources */,
+				0AFDBD9817EB41A700090EFB /* ChordsDBModel.sqlite in Resources */,
+				0AFDBD9A17EB41A700090EFB /* test.dat in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,6 +503,8 @@
 				9B8FFA5F17E797BA007FE4B4 /* iCarousel.m in Sources */,
 				0A0BD21917E8810B00D54DFA /* Chord.m in Sources */,
 				0A0BD23417E8A56800D54DFA /* SmallSchemeView.m in Sources */,
+				0A09FDCA17E9CE3100A06DDB /* UIView+DrawGuitarMarkers.m in Sources */,
+				0AFDBD9017EB410200090EFB /* NSData+SSToolkitAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

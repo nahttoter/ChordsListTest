@@ -9,13 +9,15 @@
 	<key>Host</key>
 	<string>http://www.songsterr.com/</string>
 	<key>reachabilityHostCheck</key>
-	<string>http://www.songsterr.com/</string>
+	<string>www.songsterr.com</string>
 	<key>URL</key>
 	<dict>
 		<key>chordDiagram</key>
 		<string>a/ra/chordDiagrams.json</string>
 		<key>tuningNoteSample</key>
-		<string>a/wa/tuningNoteSample?note=%@&amp;instrument=%@</string>
+		<string>a/wa/tuningNoteSample?note=</string>
+		<key>instrument</key>
+		<string>&amp;instrument=27</string>
 	</dict>
 </dict>
 </plist>

@@ -91,51 +91,36 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="372"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" image="frets.jpg" id="1J3-Hs-ljl">
-                                <rect key="frame" x="-13" y="0.0" width="237" height="372"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                            </imageView>
+                            <view contentMode="scaleToFill" id="bwz-Ij-2WY" userLabel="FretBoard">
+                                <rect key="frame" x="0.0" y="0.0" width="224" height="372"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="center" image="frets.jpg" id="1J3-Hs-ljl">
+                                        <rect key="frame" x="-7" y="-9" width="237" height="381"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                             <view contentMode="scaleToFill" id="xqd-Wu-EqM" userLabel="iCarousel" customClass="iCarousel">
-                                <rect key="frame" x="222" y="32" width="99" height="310"/>
+                                <rect key="frame" x="222" y="0.0" width="99" height="372"/>
+                                <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Duv-jk-H0I" id="aWP-eL-6va"/>
                                     <outlet property="delegate" destination="Duv-jk-H0I" id="SfV-yg-RCO"/>
                                 </connections>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Vm0-5p-d5Q">
-                                <rect key="frame" x="223" y="0.0" width="97" height="36"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="876" text="Chord" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" id="swq-lX-svp">
+                                <rect key="frame" x="51" y="341" width="96" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Button" image="key_up.jpg">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="p7Z-i2-FYd">
-                                <rect key="frame" x="223" y="336" width="97" height="36"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Button" image="key_down.jpg">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="876" text="Chord" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="swq-lX-svp">
-                                <rect key="frame" x="48" y="346" width="75" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0zU-fG-DGj">
-                                <rect key="frame" x="128" y="338" width="36" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0zU-fG-DGj">
+                                <rect key="frame" x="142" y="334" width="36" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Button" image="play-icon.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -144,6 +129,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="playChord:" destination="Duv-jk-H0I" eventType="touchUpInside" id="iAY-AC-xfC"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.14079483695652173" green="0.14079483695652173" blue="0.14079483695652173" alpha="1" colorSpace="calibratedRGB"/>
@@ -153,6 +141,7 @@
                     <connections>
                         <outlet property="carousel" destination="xqd-Wu-EqM" id="MJx-TO-DyA"/>
                         <outlet property="chordNameLbl" destination="swq-lX-svp" id="yGP-YK-5WY"/>
+                        <outlet property="fretBoardView" destination="bwz-Ij-2WY" id="j0e-vA-BBU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iK2-vS-0aG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -162,8 +151,6 @@
     </scenes>
     <resources>
         <image name="frets.jpg" width="249" height="386"/>
-        <image name="key_down.jpg" width="141" height="36"/>
-        <image name="key_up.jpg" width="141" height="36"/>
         <image name="play-icon.png" width="36" height="36"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -13,7 +13,6 @@
 {
     
 }
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *searchResults;
 @property (nonatomic, strong) NSArray *chordsArray;
 @end

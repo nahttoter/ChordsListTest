@@ -5,11 +5,11 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#define ConfigServiceInstance [ConfigService sharedInstance]
 @interface ConfigService : NSObject
 
 @property (readonly, nonatomic) NSDictionary *values;
-
++ (ConfigService *)sharedInstance;
 - (ConfigService *) init;
 
 - (NSObject *) getObject: (NSString *)key;

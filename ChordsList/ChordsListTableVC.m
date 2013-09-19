@@ -9,6 +9,7 @@
 #import "ChordsListTableVC.h"
 #define kDetailChordSegue @"showChordsDetailSegue"
 #define chordsArrayFilename @"chordsArray.dat"
+#define chordsArrayDatFile @"chordsArray"
 @interface ChordsListTableVC ()
 
 @end
@@ -26,124 +27,51 @@
     return self;
 }
 
+//read plist of Different chords
 -(NSArray *) readChordsArray
 {
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:chordsArrayFilename];
-    NSLog(@"Loaded arr");
-    return [NSArray arrayWithContentsOfFile:filePath];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"chordsArray" ofType:@"dat"];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        NSArray *loadedArray = [[NSArray alloc] initWithContentsOfFile:path];
+        return loadedArray;
+    }
+    else return nil;
+}
 
-}
--(void) storeChordsArray:(NSArray *) chordsArr
+
+-(void) loadData
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:chordsArrayFilename];
-    [chordsArr writeToFile:filePath atomically:YES];
+    self.chordsArray=[self readChordsArray];
+    [self.tableView reloadData];
     
-    NSLog(@"Stored");
+    /*
     
-}
--(void) setup
-{
-    //if is first launcg parse data from json
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    if ([prefs integerForKey:@"firstTimeLaunch"]==1) {
-        self.chordsArray=[self readChordsArray];
-        [self.tableView reloadData];
-    }
-    else
-    {
-#warning del
-        UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc]     initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        activityView.center=self.view.center;
-        [activityView startAnimating];
-        [self.view addSubview:activityView];
-        
         NSDictionary *chordsData = [NSDictionary dictionaryWithContentsOfJSONString:@"chordDiagrams.json"];
-         NSLog(@"Started");
+        NSLog(@"Started parsing");
         [DataManagerSharedInstance savingParseResultFrom:chordsData];
-        NSLog(@"Finished");
-        [prefs setValue:@1 forKey:@"firstTimeLaunch"];
-        [prefs synchronize];
-        if ([DataManagerSharedInstance.setOfChordsName count]) {
-            self.chordsArray=[NSArray arrayWithArray:[DataManagerSharedInstance.setOfChordsName allObjects]];
-            [self.tableView reloadData];
-            
-            [self storeChordsArray:self.chordsArray];
-            NSLog(@"Loaded chords from storage");
-        }
-        
-        [activityView stopAnimating];
-    }
+     */
 }
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTablewViewWithNewData) name:kNotifDataUpdated object:nil];
     
-    [self setup];
-    
-    /*
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^()
-    {
-        [ApiServiceInstance apiGetAllChords:^(BOOL success)
-         {
-             NSLog(@"Loaded chords from json"); 
-         }
-                                      error:^(NSError *error)
-         {
-             
-         }];
-        
-        dispatch_async(dispatch_get_main_queue(), ^()
-                       {
-                           // most UIKit tasks are permissible only from the main queue or thread,
-                           // so if you want to update an UI as a result of the completed action,
-                           // this is a safe way to proceed
-                           self.chordsArray=[NSArray arrayWithArray:[DataManagerSharedInstance.setOfChordsName allObjects]];
-                           [self.tableView reloadData];
-                       });
-    });
-    */
-    /*
-    NSOperationQueue *theQueue = [[NSOperationQueue alloc] init];
-    
-    theQueue.name = @"Parsing data Queue";
-    NSBlockOperation *parseBlock = [NSBlockOperation blockOperationWithBlock:^{
-       
-        
-    }];
-    
-    
-    NSBlockOperation *updateDataBlock = [NSBlockOperation blockOperationWithBlock:^{
-       
-        self.chordsArray=[NSArray arrayWithArray:[DataManagerSharedInstance.setOfChordsName allObjects]];
-        searchResults=[[NSArray alloc] init];
-        [self.tableView reloadData];
-        NSLog(@"Loaded chords from json");        
-    }];
-    
-    parseBlock.threadPriority=NSOperationQueuePriorityNormal;
-    updateDataBlock.threadPriority=NSOperationQueuePriorityNormal;
-    
-    
-    [updateDataBlock addDependency:updateDataBlock];
-    [theQueue addOperation:parseBlock];
-    [theQueue addOperation:updateDataBlock];
-    
-  //  [theQueue waitUntilAllOperationsAreFinished];
-    */
-    
+    [self loadData];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
+-(void) updateTablewViewWithNewData
+{
+    NSLog(@"Reload table after updating CoreData");
+    if ([DataManagerSharedInstance.setOfChordsName count]) {
+        self.chordsArray=[DataManagerSharedInstance.setOfChordsName allObjects];
+        [self.tableView reloadData];
+    }
+
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -161,25 +89,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         return [self.searchResults count];
         
     } else {
         return [self.chordsArray count];
-        
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*static NSString *CellIdentifier = @"ChordsName";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    if (cell == nil) {
-       cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-    }*/
+   
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
     if( cell == nil){
@@ -207,7 +128,7 @@
                                     searchText];
     
     searchResults = [self.chordsArray filteredArrayUsingPredicate:resultPredicate];
-    NSLog(@"search count %d %@",[searchResults count], self.searchResults);
+    //NSLog(@"search count %d %@",[searchResults count], self.searchResults);
     [self.tableView reloadData];
 }
 
@@ -238,10 +159,13 @@ shouldReloadTableForSearchString:(NSString *)searchString
         NSIndexPath *indexPath = nil;
         if ([self.searchDisplayController isActive]) {
             indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+            destinationViewController.chordName=[NSString stringWithString: [self.searchResults objectAtIndex:indexPath.row]] ;
+
             destinationViewController.selectedChordArray = [DataManagerSharedInstance fetchSpecificChordsByName:[self.searchResults objectAtIndex:indexPath.row]];
             
         } else {
             indexPath = [self.tableView indexPathForSelectedRow];
+            destinationViewController.chordName=[NSString stringWithString: [self.chordsArray objectAtIndex:indexPath.row]] ;
             destinationViewController.selectedChordArray = [DataManagerSharedInstance fetchSpecificChordsByName:[self.chordsArray objectAtIndex:indexPath.row]];
         }
     }

@@ -11,6 +11,44 @@
 #import <CommonCrypto/CommonDigest.h>
 
 @implementation NSString (SSToolkitAdditions)
+static unsigned majorIntValues[] = {1000,100,10,1,0};
+#define numMajorIntValues (sizeof(majorIntValues) / sizeof(unsigned))
+static char majorCharValues[] = {'M','C','X','I','N'};
+#define numMajorCharValues (sizeof(majorCharValues) / sizeof(char))
+static unsigned intValues[] = {1000,500,100,50,10,5,1};
+#define numIntValues (sizeof(intValues) / sizeof(unsigned))
+static char charValues[] = {'M','D','C','L','X','V','I'};
+#define numCharValues (sizeof(charValues) / sizeof(char))
+
++ (NSString *)romanianStringForObjectValue:(id)number {
+    if(![number respondsToSelector:@selector(unsignedIntegerValue)]) return @"0";
+    NSUInteger value = [number unsignedIntegerValue];
+    if(value == 0) return @"N";
+    NSMutableString *string = [NSMutableString new];
+    uint8_t i,j;
+    for(i = 0, j = 0; value && i < numIntValues; ++i) {
+        while(intValues[i] <= majorIntValues[j]) ++j;
+        while(value >= intValues[i]) {
+            [string appendFormat:@"%c",charValues[i]];
+            value -= intValues[i];
+        }
+        if(value >= (intValues[i] - majorIntValues[j])) {
+            [string appendFormat:@"%c%c",majorCharValues[j],charValues[i]];
+            value -= (intValues[i] - majorIntValues[j]);
+        }
+    }
+    return string;
+}
+- (NSAttributedString *)attributedStringForObjectValue:(id)anObject withDefaultAttributes:(NSDictionary *)attributes {
+    return [[NSAttributedString alloc] initWithString:[NSString romanianStringForObjectValue:anObject]
+                                            attributes:attributes] ;
+}
+
+- (BOOL)getObjectValue:(id *)anObject forString:(NSString *)string errorDescription:(NSString **)error {
+    if(error) *error = @"Decoding roman numerals is currently unsupported";
+    return NO;
+}
+
 
 - (BOOL)containsString:(NSString *)string {
 	return !NSEqualRanges([self rangeOfString:string], NSMakeRange(NSNotFound, 0));

@@ -24,6 +24,8 @@
  */
 - (BOOL)containsString:(NSString *)string;
 
+//romanian string
++ (NSString *)romanianStringForObjectValue:(id)number;
 
 ///--------------
 /// @name Hashing

@@ -1,26 +1,18 @@
 
 #import "ApiService.h"
 
-static NSString *const baseURLString = @"http://www.raywenderlich.com/downloads/weather_sample/";
-
 @implementation ApiService {
     NSString *_host;
     NSInteger  _timeout;
-    NSMutableSet *currentObjectsSet;
-    Float32 apiTotalExpectBytesForUpload;
-    Float32 apiTotalUploadedBytes;
-
-}
-
-
+    BOOL isUpdatedData;
+ }
 
 @synthesize httpAFClient;
-@synthesize internetActive;
+@synthesize internetIsActive;
 
 - (ConfigService *)configService
 {
-    ConfigService *configService=[[ConfigService alloc] init];
-    return configService;
+    return ConfigServiceInstance;
 }
 
 + (ApiService*)sharedInstance {
@@ -28,8 +20,6 @@ static NSString *const baseURLString = @"http://www.raywenderlich.com/downloads/
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         __sharedInstance = [[ApiService alloc] init];
-        
-       
     });
     
     return __sharedInstance;
@@ -45,11 +35,11 @@ static NSString *const baseURLString = @"http://www.raywenderlich.com/downloads/
         self.httpAFClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:_host]];
         [AFJSONRequestOperation addAcceptableContentTypes: [NSSet setWithObject:@"text/html"]];
        
-        NSLog(@"Current work host: %@", _host);
+        NSLog(@"Current host: %@", _host);
         _timeout = [(NSString *)[self.configService getObject: @"Timeout"] intValue];
-        NSLog(@"Current timeout: %d", _timeout);
-        
-       
+        isUpdatedData=NO;
+        //NSLog(@"Current timeout: %d", _timeout);
+   
     }
     return self;
 }
@@ -61,55 +51,52 @@ static NSString *const baseURLString = @"http://www.raywenderlich.com/downloads/
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkNetworkStatus:) name:kReachabilityChangedNotification object:nil];
     
     // check if a pathway to a host exists
-    hostReachable = [Reachability reachabilityWithHostname:(NSString *)[self.configService getObject: @"reachabilityHostCheck"]] ;
+    hostReachable = [Reachability reachabilityWithHostname:(NSString *)[self.configService getObject: @"reachabilityHostCheck"]];
+    [hostReachable connectionRequired];
     [hostReachable startNotifier];
 }
 
+
+// called after network status changes
 -(void) checkNetworkStatus:(NSNotification *)notice
 {
     Reachability * reach = [notice object];
     if([reach isReachable])
     {
-        NSLog(@"API:The host is present.");
+        //NSLog(@"API:The host is present.");
+        if (isUpdatedData==NO)
+        {
+            [self updateCoreDataFromServer];
+        }
     }
     else
     {
         NSLog(@"API:The host is down.");
-        
     }
     
-    // called after network status changes
     NetworkStatus hostStatus = [hostReachable currentReachabilityStatus];
     switch (hostStatus)
     {
         case NotReachable:
         {
-        
-            NSLog(@"The internet is down.");
-
-           // [self postNitifcationWithObject:self.internetActive];
+            //NSLog(@"The internet is down.");
+            self.internetIsActive=NO;
             break;
         }
         case ReachableViaWiFi:
         {
             NSLog(@"API: inet byWifi");
-            
-
+            self.internetIsActive=YES;
             break;
         }
         case ReachableViaWWAN:
         {
+            self.internetIsActive=YES;            
             NSLog(@"The internet is working via WWAN.");
             break;
         }
     }
 }
-
-
-
-/*
- * Return new instance of request for API action
- */
 
 - (NSString *)stringWithFormEncodedComponentsIn:(NSDictionary *) dict {
 	NSMutableArray *arguments = [NSMutableArray arrayWithCapacity:[dict count]];
@@ -122,6 +109,8 @@ static NSString *const baseURLString = @"http://www.raywenderlich.com/downloads/
 	return [arguments componentsJoinedByString:@"&"];
 }
 
+//Return new instance of request for API action
+
 - (NSMutableURLRequest *) createGETRequest: (NSString *)action params:(NSDictionary *)params
 {
     NSMutableString *urlString = [[NSMutableString alloc] initWithString:_host];
@@ -129,113 +118,128 @@ static NSString *const baseURLString = @"http://www.raywenderlich.com/downloads/
     
     if (params != nil) {
         [urlString appendString:@"?"];
-       // [urlString appendString: [params stringWithFormEncodedComponents]];
     }
-    NSLog(@"Create request for URL: %@", urlString);
+    //NSLog(@"Create request for URL: %@", urlString);
     NSURL *url = [[NSURL alloc] initWithString:urlString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]
             initWithURL:url
             cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
-                                    
-// try NSURLRequestReturnCacheDataElseLoad
-        timeoutInterval: _timeout];
+            timeoutInterval: _timeout];
     request.HTTPMethod = @"GET";
 
     return request;
 }
 
-
-+ (BOOL) isSuccessResult: (NSDictionary *)JSON
-{
-    if ([JSON objectForKey:@"error"]) {
-        return NO;
-    }
-    else
-    {
-    return YES;
-    }//[JSON objectForKey:@"status"] ;
-}
-
 #pragma mark Api Methods
 
+-(void) updateCoreDataFromServer
+{
+    isUpdatedData=YES;
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW,0), ^(void)
+                   {
+                       NSLog(@"Request chords from server");
+                       [ApiServiceInstance apiGetAllChords:^(BOOL success)
+                        {
+                            NSLog(@"Loaded chords from json");  
+                        }
+                                                     error:^(NSError *error)
+                        {
+                            isUpdatedData=NO;
+                        }];
+                   });
+}
 
+
+//Get chords Data from server
 -(void) apiGetAllChords:(void (^)(BOOL success))completionBlock error:(void (^)(NSError *))errorResult
 {
-    NSMutableString *urlString = [[NSMutableString alloc] initWithString:_host];
-    [urlString appendString:[[self configService] getApiUrlFor:@"chordDiagram"]];
-    //NSURL *urlRequest=[NSURL URLWithString:urlString];
-    //NSURLRequest *request = [self.httpAFClient requestWithMethod:@"GET" path:urlString parameters:nil ];
-    
-    NSURLRequest *request = [self createGETRequest:@"chordDiagram" params:nil];
-    
-    /*[NSURLRequest requestWithURL:urlRequest
-                                            cachePolicy:NSURLRequestReturnCacheDataElseLoad
-                                        timeoutInterval:_timeout];
-    */
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        // code for successful return goes here
-        [[AFNetworkActivityIndicatorManager sharedManager] decrementActivityCount];
+    if (self.internetIsActive)
+    {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         
-        //NSLog(@"Response result %@",JSON);
+        NSMutableString *urlString = [[NSMutableString alloc] initWithString:_host];
+        [urlString appendString:[[self configService] getApiUrlFor:@"chordDiagram"]];
+
+        NSURLRequest *request = [self createGETRequest:@"chordDiagram" params:nil];
         
-        [self parseDataJSON:JSON];
-         completionBlock(YES);
-        
-    }failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        // code for failed request goes here
-        [[AFNetworkActivityIndicatorManager sharedManager] decrementActivityCount];
-        NSLog(@"Return error by request chords list %@",error.description);
-        
-        errorResult(error);
-    }];
+            AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
+        {
+            [[AFNetworkActivityIndicatorManager sharedManager] decrementActivityCount];
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            
+            //NSLog(@"Response result %@",JSON);        
+            [self parseDataJSON:JSON];
+             completionBlock(YES);
+      
+        }failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+            // code for failed request goes here
+            [[AFNetworkActivityIndicatorManager sharedManager] decrementActivityCount];
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            
+            NSLog(@"Return error by request chords list %@",error.description);
+            
+            errorResult(error);
+        }];
+        [self.httpAFClient enqueueHTTPRequestOperation:operation];
+    }
     
-    [self.httpAFClient enqueueHTTPRequestOperation:operation];
-    
+}
+
+//saving music dat to memory
+-(void) storeDataOfFile:(NSData *) data andID:(NSInteger)idChord
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *fileName=[NSString stringWithFormat:@"chordsFile%d.dat",idChord];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:fileName];
+    if ([data writeToFile:filePath atomically:YES]) {
+        NSLog(@"Stored file %@",filePath);
+    } 
+}
+
+//didn't finish this nethod - have to calculate Midi Sample Codes
+-(void) apiGetAudioSampleOfChord:(Chord *) chord  success:(void (^)(NSData *successData))completionBlock error:(void (^)(NSError *))errorResult;
+{
+    if (self.internetIsActive)
+    {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        NSMutableString *urlString = [[NSMutableString alloc] initWithString:_host];
+        [urlString appendString:[[self configService] getApiUrlFor:@"tuningNoteSample"]];
+
+        //Need to correct sample ID
+        [urlString appendString:[NSString stringWithFormat:@"40"]];
+        
+        [urlString appendString:[[self configService] getApiUrlFor:@"instrument"]];
+        
+        NSURLRequest *urlRequest=[[NSURLRequest alloc]initWithURL:[NSURL URLWithString:urlString]];
+        
+        AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest ];
+       
+        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject)
+         {
+            if (operation.responseData) {
+                
+                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                [[AFNetworkActivityIndicatorManager sharedManager] decrementActivityCount];
+                
+                [self storeDataOfFile:operation.responseData andID:chord.idChord.integerValue];
+                completionBlock(operation.responseData);
+                
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error)
+        {
+                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                [[AFNetworkActivityIndicatorManager sharedManager] decrementActivityCount];
+                errorResult(error);
+        }];
+          
+        [self.httpAFClient enqueueHTTPRequestOperation:operation];
+    }
 }
 
 -(void) parseDataJSON:(id) DataJSON
 {
     [DataManagerSharedInstance savingParseResultFrom:(NSDictionary*)DataJSON];
-}
-
--(void) apiLoginPostRequestonCompletion:(void (^)(BOOL success))completionBlock error:(void (^)(NSError *))errorResult
-{
-    NSDictionary *params;
-    
-    NSMutableString *urlString = [[NSMutableString alloc] initWithString:_host];
-    [urlString appendString:[[self configService] getApiUrlFor:@"login"]];
-    
-    NSDictionary *POSTDict=[NSDictionary dictionaryWithObject:params forKey:@"params"];
-    
-    NSLog(@"Post dict login %@,",POSTDict);
-    
-    NSURLRequest *request = [self.httpAFClient requestWithMethod:@"POST" path:@"/api/login" parameters:POSTDict ];
-    
-    NSString* newStr=nil;
-    if ([[request HTTPBody] length]) {
-        newStr   =  [[NSString alloc] initWithData:[request HTTPBody]
-                                          encoding:NSUTF8StringEncoding] ;
-        //[[NSString alloc] initWithUTF8String:[[request HTTPBody] bytes]]
-        
-    }
-    
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        // code for successful return goes here
-        [[AFNetworkActivityIndicatorManager sharedManager] decrementActivityCount];
-        
-        [self parseDataJSON:JSON];
-        completionBlock(YES);
-        
-    }failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        // code for failed request goes here
-        [[AFNetworkActivityIndicatorManager sharedManager] decrementActivityCount];
-        NSLog(@"return error login %@",JSON);
-        
-        errorResult(error);
-    }];
-    
-    [self.httpAFClient enqueueHTTPRequestOperation:operation];
-    
 }
 
 @end
