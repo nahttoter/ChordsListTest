@@ -11,18 +11,33 @@
 #define kWhiteColor [UIColor whiteColor]
 #define kMarkersTag 11
 @implementation UIView (DrawGuitarMarkers)
+
+-(void) createImageMarkerWithFrame:(CGRect) frame andColor:(UIColor *) color
+{
+    UIImageView *marker=[[UIImageView alloc] initWithFrame:frame];
+    marker.clipsToBounds=YES;
+    marker.layer.cornerRadius=frame.size.height/2;
+    marker.backgroundColor=color;
+    marker.tag=kMarkersTag;
+    [self addSubview:marker];
+}
+
 -(void) createMarkerAtCenter:(CGPoint) centerPoint withRadius:(int) radius
 {
     CGRect frame=CGRectMake(0, 0, 2*radius, 2*radius);
     frame.origin.x=centerPoint.x-radius;
     frame.origin.y=centerPoint.y-radius;
+    [self createImageMarkerWithFrame:frame andColor:kMarkColor];
+}
+
+-(void) createFreatBoardWhiteMarkersAtCenter:(CGPoint) centerPoint withRadius:(int) radius
+{
+    CGRect frame=CGRectMake(0, 0, 2*radius, 2*radius);
+    frame.origin.x=centerPoint.x-radius;
+    frame.origin.y=centerPoint.y-radius;
     
-    UIImageView *marker=[[UIImageView alloc] initWithFrame:frame];
-    marker.clipsToBounds=YES;
-    marker.layer.cornerRadius=radius;
-    marker.backgroundColor=kMarkColor;
-    marker.tag=kMarkersTag;
-    [self addSubview:marker];
+    [self createImageMarkerWithFrame:frame andColor:kWhiteColor];
+
 }
 
 -(void) createMarkerAtCenter:(CGPoint) centerPoint  withRadius:(int) radius andFingerNumber:(NSString*) fingerNumb
@@ -32,7 +47,7 @@
     CGRect frame=CGRectMake(0, 0, 2*radius, 2*radius);
     frame.origin.x=centerPoint.x-radius;
     frame.origin.y=centerPoint.y-radius;
-
+    
     UILabel  * fingerLbl = [[UILabel alloc] initWithFrame:frame];
     fingerLbl.backgroundColor=[UIColor clearColor];
     fingerLbl.textColor=kWhiteColor;
@@ -42,19 +57,6 @@
     [self addSubview:fingerLbl];
 }
 
--(void) createFreatBoardWhiteMarkersAtCenter:(CGPoint) centerPoint withRadius:(int) radius
-{
-    CGRect frame=CGRectMake(0, 0, 2*radius, 2*radius);
-    frame.origin.x=centerPoint.x-radius;
-    frame.origin.y=centerPoint.y-radius;
-    
-    UIImageView *marker=[[UIImageView alloc] initWithFrame:frame];
-    marker.clipsToBounds=YES;
-    marker.layer.cornerRadius=radius;
-    marker.backgroundColor=kWhiteColor;
-    marker.tag=kMarkersTag;
-    [self addSubview:marker];
-}
 
 -(void) createBarreAtStartPoint:(CGPoint) centerPoint andRadius:(int) radius withWidth:(int) width
 {
@@ -62,12 +64,7 @@
     frame.origin.x=centerPoint.x-radius;
     frame.origin.y=centerPoint.y-radius;
     
-    UIImageView *barre=[[UIImageView alloc] initWithFrame:frame];
-    barre.clipsToBounds=YES;
-    barre.layer.cornerRadius=radius;
-    barre.backgroundColor=kMarkColor;
-    barre.tag=kMarkersTag;
-    [self addSubview:barre];
+    [self createImageMarkerWithFrame:frame andColor:kMarkColor];
 }
 
 -(void) removeAllMarkers
@@ -77,7 +74,6 @@
             [view removeFromSuperview];
         }
     }
-
 }
 
 -(void) setBordersColor:(UIColor *) color

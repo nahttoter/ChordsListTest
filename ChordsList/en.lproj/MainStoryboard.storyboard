@@ -12,7 +12,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="usi-eg-E7U">
-                        <rect key="frame" x="0.0" y="436" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
@@ -28,7 +28,7 @@
             <objects>
                 <tableViewController id="sLH-Ou-IRP" customClass="ChordsListTableVC" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="yZ7-ZB-ka4">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="8ep-35-858">
@@ -88,12 +88,12 @@
             <objects>
                 <viewController id="Duv-jk-H0I" customClass="SelectedChordVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FfU-ej-qMF">
-                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="bwz-Ij-2WY" userLabel="FretBoard">
-                                <rect key="frame" x="0.0" y="0.0" width="224" height="372"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="0.0" y="88" width="224" height="372"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="center" image="frets.jpg" id="1J3-Hs-ljl">
                                         <rect key="frame" x="-7" y="-9" width="237" height="381"/>
@@ -102,7 +102,7 @@
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="876" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" id="GyF-he-C6u">
                                         <rect key="frame" x="96" y="4" width="32" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -110,7 +110,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="xqd-Wu-EqM" userLabel="iCarousel" customClass="iCarousel">
-                                <rect key="frame" x="222" y="0.0" width="99" height="372"/>
+                                <rect key="frame" x="222" y="0.0" width="99" height="460"/>
                                 <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -119,15 +119,15 @@
                                 </connections>
                             </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="876" text="Chord" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" id="swq-lX-svp">
-                                <rect key="frame" x="49" y="341" width="96" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <rect key="frame" x="49" y="429" width="96" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0zU-fG-DGj">
-                                <rect key="frame" x="142" y="334" width="36" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <rect key="frame" x="142" y="422" width="36" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Button" image="play-icon.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -140,6 +140,13 @@
                                     <action selector="playChord:" destination="Duv-jk-H0I" eventType="touchUpInside" id="iAY-AC-xfC"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1 2 3 4 5 6" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" id="JIM-Qp-3a4">
+                                <rect key="frame" x="14" y="32" width="195" height="54"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="42"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.14079483695652173" green="0.14079483695652173" blue="0.14079483695652173" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -150,6 +157,7 @@
                         <outlet property="chordNameLbl" destination="swq-lX-svp" id="yGP-YK-5WY"/>
                         <outlet property="fretBoardView" destination="bwz-Ij-2WY" id="j0e-vA-BBU"/>
                         <outlet property="fretLabel" destination="GyF-he-C6u" id="mT2-P4-Iaq"/>
+                        <outlet property="schemeLbl4Inch" destination="JIM-Qp-3a4" id="kiF-cx-FoK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iK2-vS-0aG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -161,9 +169,32 @@
         <image name="frets.jpg" width="249" height="386"/>
         <image name="play-icon.png" width="36" height="36"/>
     </resources>
+    <classes>
+        <class className="ChordsListTableVC" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ChordsListTableVC.h"/>
+        </class>
+        <class className="SelectedChordVC" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SelectedChordVC.h"/>
+            <relationships>
+                <relationship kind="action" name="playChord:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="carousel" candidateClass="iCarousel"/>
+                <relationship kind="outlet" name="chordNameLbl" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="fretBoardView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="fretLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="schemeLbl4Inch" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="iCarousel" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/iCarousel.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dataSource"/>
+                <relationship kind="outlet" name="delegate"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
 </document>

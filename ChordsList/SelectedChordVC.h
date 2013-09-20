@@ -27,6 +27,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *chordNameLbl;
 @property (strong, nonatomic) IBOutlet UILabel *fretLabel;
 @property (nonatomic, strong) NSString *chordName;
+@property (strong, nonatomic) IBOutlet UILabel *schemeLbl4Inch;
 
 @property (nonatomic, strong) NSArray *selectedChordArray;
 @property (nonatomic, retain) AVAudioPlayer *audioPlayer;

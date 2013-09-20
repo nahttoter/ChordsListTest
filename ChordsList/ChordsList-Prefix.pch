@@ -18,3 +18,4 @@
 #endif
 
 #define kNotifDataUpdated @"DataWasUpdatedFromServer"
+#define is4InchDisplay  ([[UIScreen mainScreen] bounds].size.height == 568)?TRUE:FALSE

@@ -153,26 +153,37 @@
 }
 
 #pragma mark fretboard methods
+-(void) updateTextFor4inchWithText:(NSString *) textStr
+{
+    if (is4InchDisplay) {
+        self.schemeLbl4Inch.hidden = NO;
+        self.schemeLbl4Inch.text = textStr;
+    }
+    else self.schemeLbl4Inch.hidden=YES;
+}
 
 -(void) updateFretBoardWithChord:(Chord *) selectedChord inView:(UIView *) view
 {
     [view removeAllMarkers]; // from previous chord
     self.fretLabel.text=[NSString romanianStringForObjectValue:selectedChord.fret];
+    [self updateTextFor4inchWithText:selectedChord.scheme];
     
-    // counter of strings, 0- 6th string, 5th - first string
+    
+    //a lot of not very good hardcode - to impliment nececcary places for markers in chosen background.
+    // stringX - counter of strings, 0- 6th string, 5th - first string, fretY - vertical fret count
     int fretY=0,stringX=0;
-    int shiftX=170/5,shiftY=320/5,
-        startX=27,startY=42 ;
-    int radius=12;          //market radius
-    int imageFretRange=5; //how many frets could be displayed on image at once
+    int shiftX=170/5,shiftY=320/5,  //shift x,y - spaces between frets and strings on a picture
+        startX=27,startY=42 ;       //origin for 1st string, and 1st fret
+    int radius=12;                  //market radius
+    int imageFretRange=5;           //how many frets could be displayed on image 
     
-    NSArray *fretBoardWhiteMarkersArr=@[@3,@5,@7,@9,@15,@17,@21];
+    NSArray *fretBoardWhiteMarkersArr=@[@3,@5,@7,@9,@15,@17,@21];  //markers for acoustic guitar
     NSMutableArray *drawingWhiteMarkersArr=[[NSMutableArray alloc] init];
     int displayMin=[selectedChord.fret integerValue], displayMax=displayMin+imageFretRange;
     
-    //draw only 12 fret with 2 white points
-    if (displayMin>=7) {
-       
+    //draw 12 fret with 2 white points
+    if (displayMin>=7)
+    {
         fretY = 12-displayMin;
         if (fretY<imageFretRange) {
             CGPoint centerPoint=CGPointMake(startX + 1.5*shiftX, startY+fretY*shiftY);
@@ -182,24 +193,26 @@
         }
     }
     
-    for (NSNumber *numb in fretBoardWhiteMarkersArr) {
+    //count which markers need to display
+    for (NSNumber *numb in fretBoardWhiteMarkersArr)
+    {
         if ((numb.integerValue >= displayMin) && (numb.integerValue < displayMax)) {
             NSNumber *drawNumb=[NSNumber numberWithInt:(numb.integerValue-displayMin)];
             [drawingWhiteMarkersArr addObject:drawNumb];
         }
     }
     
+    //adding them to view
     for (NSNumber *drawNumb in drawingWhiteMarkersArr)
     {
-         //int startPos = [selectedChord.fret integerValue];
          fretY = drawNumb.integerValue;
          CGPoint centerPoint=CGPointMake(startX + 2.5*shiftX, startY+fretY*shiftY);
          [view createFreatBoardWhiteMarkersAtCenter:centerPoint withRadius:radius ];
     }
     
-    
     fretY=0;
     BOOL hasBarre=NO;
+    //use fingers scheme to detect barre
     if (selectedChord.fingers)
     {
         
@@ -216,15 +229,15 @@
     
     NSArray *schemeArr=[selectedChord.scheme componentsSeparatedByString:@" "];
     NSArray *putFinger=[selectedChord.fingers componentsSeparatedByString:@" "];
-    NSLog(@"put finher %@ %@",putFinger,selectedChord);
 
-    for (NSString *fretEnum in schemeArr) {
-        
+    for (NSString *fretEnum in schemeArr)
+    {   
         if ([fretEnum isEqualToString:@"X"] || [fretEnum isEqualToString:@"x"]) {
             //closed string, don't draw
         }
         else if ([fretEnum isEqualToString:@"0"])
         {
+            //draw small marker for open string
             CGPoint centerPoint=CGPointMake(startX + stringX*shiftX, startY-shiftY/2);
             [view createMarkerAtCenter:centerPoint withRadius:7];
             
@@ -239,13 +252,14 @@
                 if ([putFinger count]>stringX) {
                     [view createMarkerAtCenter:centerPoint withRadius:radius andFingerNumber:(NSString*)[putFinger objectAtIndex:stringX]];
                 }
-                
             }
             else
             {
                 int startPos = [selectedChord.fret integerValue];
                 fretY = [[schemeArr objectAtIndex:stringX] integerValue] - startPos;
                 CGPoint centerPoint=CGPointMake(startX + stringX*shiftX, startY+fretY*shiftY);
+                
+                //if has finger scheme - put number with marker
                 if ([putFinger count]>stringX) {
                     [view createMarkerAtCenter:centerPoint withRadius:radius andFingerNumber:(NSString*)[putFinger objectAtIndex:stringX]];
                 }
@@ -255,7 +269,7 @@
                 }
             }
         } 
-        stringX++;
+        stringX++; // go to next string
     }
 
 }
@@ -312,7 +326,7 @@
         stringX--;
     }
     
-    //NSLog(@"Preparing to play midis %@",playingMidiArr);
+    NSLog(@"Preparing to play midis %@",playingMidiArr);
     
     self.audioPlayerArr = [[NSMutableArray alloc] init];
     stringX=0;
@@ -481,6 +495,7 @@
     [self setChordNameLbl:nil];
     [self setFretBoardView:nil];
     [self setFretLabel:nil];
+    [self setSchemeLbl4Inch:nil];
     [super viewDidUnload];
 }
 

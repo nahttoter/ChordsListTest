@@ -12,7 +12,6 @@
 		0A0BD21917E8810B00D54DFA /* Chord.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0BD21817E8810B00D54DFA /* Chord.m */; };
 		0A0BD21A17E8825900D54DFA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0C5D7317E733F700EC0067 /* CoreData.framework */; };
 		0A0BD22017E8828600D54DFA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A0BD21F17E8828600D54DFA /* QuartzCore.framework */; };
-		0A0BD22317E885B700D54DFA /* chordDiagrams.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A0BD22217E885B700D54DFA /* chordDiagrams.json */; };
 		0A0BD22817E88B9000D54DFA /* frets@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A0BD22417E88B9000D54DFA /* frets@2x.jpg */; };
 		0A0BD22B17E88B9000D54DFA /* small_scheme.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A0BD22717E88B9000D54DFA /* small_scheme.jpg */; };
 		0A0BD22D17E88C2000D54DFA /* frets.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A0BD22C17E88C2000D54DFA /* frets.jpg */; };
@@ -39,7 +38,6 @@
 		0AFDBD8217EB3E6900090EFB /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AFDBD8117EB3E6900090EFB /* icon.png */; };
 		0AFDBD8B17EB3F2C00090EFB /* icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AFDBD8A17EB3F2C00090EFB /* icon114.png */; };
 		0AFDBD9017EB410200090EFB /* NSData+SSToolkitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFDBD8D17EB410200090EFB /* NSData+SSToolkitAdditions.m */; };
-		0AFDBD9717EB41A700090EFB /* chordsArray.dat in Resources */ = {isa = PBXBuildFile; fileRef = 0AFDBD9317EB41A300090EFB /* chordsArray.dat */; };
 		0AFDBD9817EB41A700090EFB /* ChordsDBModel.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 0AFDBD9417EB41A400090EFB /* ChordsDBModel.sqlite */; };
 		9B8FFA5717E79761007FE4B4 /* SelectedChordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B8FFA5617E79761007FE4B4 /* SelectedChordVC.m */; };
 		9B8FFA5F17E797BA007FE4B4 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B8FFA5E17E797BA007FE4B4 /* iCarousel.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -132,7 +130,6 @@
 		0A0BD21717E8810B00D54DFA /* Chord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chord.h; sourceTree = "<group>"; };
 		0A0BD21817E8810B00D54DFA /* Chord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chord.m; sourceTree = "<group>"; };
 		0A0BD21F17E8828600D54DFA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		0A0BD22217E885B700D54DFA /* chordDiagrams.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = chordDiagrams.json; path = Resources/chordDiagrams.json; sourceTree = "<group>"; };
 		0A0BD22417E88B9000D54DFA /* frets@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "frets@2x.jpg"; path = "Resources/frets@2x.jpg"; sourceTree = "<group>"; };
 		0A0BD22717E88B9000D54DFA /* small_scheme.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = small_scheme.jpg; path = Resources/small_scheme.jpg; sourceTree = "<group>"; };
 		0A0BD22C17E88C2000D54DFA /* frets.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = frets.jpg; path = Resources/frets.jpg; sourceTree = "<group>"; };
@@ -160,10 +157,9 @@
 		0AFDBD7517EAF59C00090EFB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		0AFDBD7717EAF5A000090EFB /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		0AFDBD8117EB3E6900090EFB /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		0AFDBD8A17EB3F2C00090EFB /* icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114.png; sourceTree = "<group>"; };
+		0AFDBD8A17EB3F2C00090EFB /* icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon114.png; path = ../icon114.png; sourceTree = "<group>"; };
 		0AFDBD8C17EB410200090EFB /* NSData+SSToolkitAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+SSToolkitAdditions.h"; sourceTree = "<group>"; };
 		0AFDBD8D17EB410200090EFB /* NSData+SSToolkitAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+SSToolkitAdditions.m"; sourceTree = "<group>"; };
-		0AFDBD9317EB41A300090EFB /* chordsArray.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = chordsArray.dat; path = Resources/chordsArray.dat; sourceTree = "<group>"; };
 		0AFDBD9417EB41A400090EFB /* ChordsDBModel.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = ChordsDBModel.sqlite; path = Resources/ChordsDBModel.sqlite; sourceTree = "<group>"; };
 		391EB7E665C64FA4B2DB1092 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B8FFA5517E79761007FE4B4 /* SelectedChordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectedChordVC.h; sourceTree = "<group>"; };
@@ -255,20 +251,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0A0BD22117E885A900D54DFA /* Resources */ = {
+		0A0BD22117E885A900D54DFA /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
-				0AFDBD9317EB41A300090EFB /* chordsArray.dat */,
-				0AFDBD9417EB41A400090EFB /* ChordsDBModel.sqlite */,
+				0AFDBD8A17EB3F2C00090EFB /* icon114.png */,
+				0AFDBD8117EB3E6900090EFB /* icon.png */,
 				0A0BD23617E8ADEE00D54DFA /* play-icon.png */,
 				0A0BD23717E8ADEE00D54DFA /* play-icon@2x.png */,
-				0A0BD22E17E88D4A00D54DFA /* small_scheme@2x.jpg */,
 				0A0BD22C17E88C2000D54DFA /* frets.jpg */,
 				0A0BD22417E88B9000D54DFA /* frets@2x.jpg */,
 				0A0BD22717E88B9000D54DFA /* small_scheme.jpg */,
-				0A0BD22217E885B700D54DFA /* chordDiagrams.json */,
+				0A0BD22E17E88D4A00D54DFA /* small_scheme@2x.jpg */,
 			);
-			name = Resources;
+			name = Graphics;
 			sourceTree = "<group>";
 		};
 		0A0BD23517E8A86200D54DFA /* SmallSchemeView */ = {
@@ -284,9 +279,10 @@
 		0A0C5D7517E73AA100EC0067 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				9B9B947717E609070025DD99 /* ChordsDBModel.xcdatamodeld */,
+				0AFDBD9417EB41A400090EFB /* ChordsDBModel.sqlite */,
 				9B9B949F17E63C380025DD99 /* DataManager.h */,
 				9B9B94A017E63C380025DD99 /* DataManager.m */,
-				9B9B947717E609070025DD99 /* ChordsDBModel.xcdatamodeld */,
 				0A0BD21717E8810B00D54DFA /* Chord.h */,
 				0A0BD21817E8810B00D54DFA /* Chord.m */,
 			);
@@ -340,7 +336,6 @@
 		9B9B944817E5D45B0025DD99 = {
 			isa = PBXGroup;
 			children = (
-				0AFDBD8A17EB3F2C00090EFB /* icon114.png */,
 				9B9B945A17E5D45B0025DD99 /* ChordsList */,
 				9B9B945317E5D45B0025DD99 /* Frameworks */,
 				9B9B945217E5D45B0025DD99 /* Products */,
@@ -394,14 +389,13 @@
 			isa = PBXGroup;
 			children = (
 				9BCF3C5917EB91270076AA66 /* MidiSamples */,
-				0A0BD22117E885A900D54DFA /* Resources */,
+				0A0BD22117E885A900D54DFA /* Graphics */,
 				9B9B945D17E5D45B0025DD99 /* InfoPlist.strings */,
 				9B9B946017E5D45B0025DD99 /* main.m */,
 				9B9B946217E5D45B0025DD99 /* ChordsList-Prefix.pch */,
 				9B9B946617E5D45B0025DD99 /* Default.png */,
 				9B9B946817E5D45B0025DD99 /* Default@2x.png */,
 				9B9B946A17E5D45B0025DD99 /* Default-568h@2x.png */,
-				0AFDBD8117EB3E6900090EFB /* icon.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -580,7 +574,6 @@
 				9B9B946B17E5D45B0025DD99 /* Default-568h@2x.png in Resources */,
 				9B9B946E17E5D45B0025DD99 /* MainStoryboard.storyboard in Resources */,
 				9B9B948217E613B70025DD99 /* config.plist in Resources */,
-				0A0BD22317E885B700D54DFA /* chordDiagrams.json in Resources */,
 				0A0BD22817E88B9000D54DFA /* frets@2x.jpg in Resources */,
 				0A0BD22B17E88B9000D54DFA /* small_scheme.jpg in Resources */,
 				0A0BD22D17E88C2000D54DFA /* frets.jpg in Resources */,
@@ -590,7 +583,6 @@
 				0A0BD23917E8ADEE00D54DFA /* play-icon@2x.png in Resources */,
 				0AFDBD8217EB3E6900090EFB /* icon.png in Resources */,
 				0AFDBD8B17EB3F2C00090EFB /* icon114.png in Resources */,
-				0AFDBD9717EB41A700090EFB /* chordsArray.dat in Resources */,
 				0AFDBD9817EB41A700090EFB /* ChordsDBModel.sqlite in Resources */,
 				9BCF3C6417EB91470076AA66 /* 24.dat in Resources */,
 				9BCF3C6517EB91470076AA66 /* 25.dat in Resources */,
@@ -799,8 +791,6 @@
 					Security,
 					"-framework",
 					SystemConfiguration,
-					"-lstdc++",
-					"-cclib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "“$(BUILT_PRODUCTS_DIR)/**";
@@ -828,8 +818,6 @@
 					Security,
 					"-framework",
 					SystemConfiguration,
-					"-lstdc++",
-					"-cclib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "“$(BUILT_PRODUCTS_DIR)/**";
