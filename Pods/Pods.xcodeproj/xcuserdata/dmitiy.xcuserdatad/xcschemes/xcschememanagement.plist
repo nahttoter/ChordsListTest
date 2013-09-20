@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>Pods-AudioPlayer.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
 		<key>Pods-MagicalRecord.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -37,7 +42,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>493DF99A7FCC4A4E8F72CB14</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>58B7ED7D97C949E490B4E073</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6B76903C9BB641D6AA3CA92B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -48,6 +63,16 @@
 			<true/>
 		</dict>
 		<key>72D5DCD1440042249725AD15</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7615A7A050AF43AA95A32B0B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7768626A3592409E8046E8AC</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -8,6 +8,7 @@
 
 #import "UIView+DrawGuitarMarkers.h"
 #define kMarkColor [UIColor blueColor]
+#define kWhiteColor [UIColor whiteColor]
 #define kMarkersTag 11
 @implementation UIView (DrawGuitarMarkers)
 -(void) createMarkerAtCenter:(CGPoint) centerPoint withRadius:(int) radius
@@ -20,6 +21,37 @@
     marker.clipsToBounds=YES;
     marker.layer.cornerRadius=radius;
     marker.backgroundColor=kMarkColor;
+    marker.tag=kMarkersTag;
+    [self addSubview:marker];
+}
+
+-(void) createMarkerAtCenter:(CGPoint) centerPoint  withRadius:(int) radius andFingerNumber:(NSString*) fingerNumb
+{
+    [self createMarkerAtCenter:centerPoint withRadius:radius];
+    
+    CGRect frame=CGRectMake(0, 0, 2*radius, 2*radius);
+    frame.origin.x=centerPoint.x-radius;
+    frame.origin.y=centerPoint.y-radius;
+
+    UILabel  * fingerLbl = [[UILabel alloc] initWithFrame:frame];
+    fingerLbl.backgroundColor=[UIColor clearColor];
+    fingerLbl.textColor=kWhiteColor;
+    fingerLbl.text=fingerNumb;
+    fingerLbl.tag=kMarkersTag;
+    fingerLbl.textAlignment=UITextAlignmentCenter;
+    [self addSubview:fingerLbl];
+}
+
+-(void) createFreatBoardWhiteMarkersAtCenter:(CGPoint) centerPoint withRadius:(int) radius
+{
+    CGRect frame=CGRectMake(0, 0, 2*radius, 2*radius);
+    frame.origin.x=centerPoint.x-radius;
+    frame.origin.y=centerPoint.y-radius;
+    
+    UIImageView *marker=[[UIImageView alloc] initWithFrame:frame];
+    marker.clipsToBounds=YES;
+    marker.layer.cornerRadius=radius;
+    marker.backgroundColor=kWhiteColor;
     marker.tag=kMarkersTag;
     [self addSubview:marker];
 }

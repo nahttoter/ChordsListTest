@@ -11,7 +11,11 @@
 @interface UIView (DrawGuitarMarkers)
 
 -(void) createMarkerAtCenter:(CGPoint) centerPoint withRadius:(int) radius;
+-(void) createMarkerAtCenter:(CGPoint) centerPoint withRadius:(int) radius andFingerNumber:(NSString*) fingerNumb;
+
 -(void) createBarreAtStartPoint:(CGPoint) centerPoint andRadius:(int) radius withWidth:(int) width;
+-(void) createFreatBoardWhiteMarkersAtCenter:(CGPoint) centerPoint withRadius:(int) radius;
+
 -(void) removeAllMarkers;
 -(void) setBordersColor:(UIColor *) color;
 @end

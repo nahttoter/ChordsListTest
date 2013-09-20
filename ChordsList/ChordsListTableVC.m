@@ -45,7 +45,6 @@
     [self.tableView reloadData];
     
     /*
-    
         NSDictionary *chordsData = [NSDictionary dictionaryWithContentsOfJSONString:@"chordDiagrams.json"];
         NSLog(@"Started parsing");
         [DataManagerSharedInstance savingParseResultFrom:chordsData];

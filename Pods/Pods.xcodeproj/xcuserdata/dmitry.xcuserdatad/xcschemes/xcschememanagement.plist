@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>Pods-AudioPlayer.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
 		<key>Pods-MagicalRecord.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -37,7 +42,37 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>1CC0437277DE474E8EBFEC08</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>382E4C7636D7404F8CD0B2CD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>493DF99A7FCC4A4E8F72CB14</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4B29A686B3DD4EFFA641E3F0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>58B7ED7D97C949E490B4E073</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>62FE11850E1C4FC383D54FAF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6B76903C9BB641D6AA3CA92B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -52,7 +87,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>7584985F183F460A9C76A024</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7615A7A050AF43AA95A32B0B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7768626A3592409E8046E8AC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8559C060A83840EE9A98095E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>949F28624503404FBAF04068</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9659C48D4C524F6488C9AD45</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -67,12 +127,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>AF6CE85F99464E2C9198BDB5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>B2B91F674FA54721A815AA59</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>C74E9EB7DCB349DA8D7565C1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D2D107A40B344372A2636FC1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E75C0DC638254967925F07F3</key>
 		<dict>
 			<key>primary</key>
 			<true/>

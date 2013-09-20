@@ -19,8 +19,11 @@
 
 @synthesize carousel;
 @synthesize selectedChordArray;
-@synthesize player;
+@synthesize audioPlayer;
+@synthesize audioPlayer2;
+
 @synthesize chordName;
+@synthesize audioPlayerArr;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -36,12 +39,12 @@
     carousel.type = iCarouselTypeLinear;
     
     if ([self.selectedChordArray count]) {
-        Chord *lastChord = (Chord *)[self.selectedChordArray lastObject];
+        Chord *firstChord = (Chord *)[self.selectedChordArray objectAtIndex:0];
         
-        self.navigationItem.title = lastChord.name;
-        self.chordNameLbl.text = lastChord.name;
-        
-        [self updateFretBoardWithChord:[self.selectedChordArray objectAtIndex:0] inView:self.fretBoardView];
+        self.navigationItem.title = firstChord.name;
+        self.chordNameLbl.text = firstChord.name;
+        [self updateFretBoardWithChord:firstChord inView:self.fretBoardView];
+        [self playSelectedChord:firstChord];
         UIView *curView=[self.carousel itemViewAtIndex:0];
         [curView setBordersColor:[UIColor greenColor]];
     }
@@ -153,62 +156,194 @@
 
 -(void) updateFretBoardWithChord:(Chord *) selectedChord inView:(UIView *) view
 {
-        [view removeAllMarkers]; // from previous chord
+    [view removeAllMarkers]; // from previous chord
+    self.fretLabel.text=[NSString romanianStringForObjectValue:selectedChord.fret];
     
-        // counter of strings, 0- 6th string, 5th - first string
-        int fretY=0,stringX=0;
-        int shiftX=170/5,shiftY=320/5,
-            startX=27,startY=42 ;
-        int radius=12;
-        
-        BOOL hasBarre=NO;
-        if (selectedChord.fingers)
-        {
-            
-            NSDictionary *barreDict = [self detectBarreInChord:selectedChord];
-            if (barreDict) {
-                //draw barre
-                int barreStartPos = [[barreDict objectForKey:@"start"] integerValue],
-                barreEndPos   = [[barreDict objectForKey:@"end"] integerValue];
-                CGPoint startBarrePoint=CGPointMake(startX + barreStartPos*shiftX, startY+fretY*shiftY);
-                [view createBarreAtStartPoint:startBarrePoint andRadius:radius withWidth:(barreEndPos-barreStartPos+1)*shiftX];
-                hasBarre=YES;
-            }
+    // counter of strings, 0- 6th string, 5th - first string
+    int fretY=0,stringX=0;
+    int shiftX=170/5,shiftY=320/5,
+        startX=27,startY=42 ;
+    int radius=12;          //market radius
+    int imageFretRange=5; //how many frets could be displayed on image at once
+    
+    NSArray *fretBoardWhiteMarkersArr=@[@3,@5,@7,@9,@15,@17,@21];
+    NSMutableArray *drawingWhiteMarkersArr=[[NSMutableArray alloc] init];
+    int displayMin=[selectedChord.fret integerValue], displayMax=displayMin+imageFretRange;
+    
+    //draw only 12 fret with 2 white points
+    if (displayMin>=7) {
+       
+        fretY = 12-displayMin;
+        if (fretY<imageFretRange) {
+            CGPoint centerPoint=CGPointMake(startX + 1.5*shiftX, startY+fretY*shiftY);
+            [view createFreatBoardWhiteMarkersAtCenter:centerPoint withRadius:radius ];
+            CGPoint centerPoint2=CGPointMake(startX + 3.5*shiftX, startY+fretY*shiftY);
+            [view createFreatBoardWhiteMarkersAtCenter:centerPoint2 withRadius:radius ];
         }
-        
-        NSArray *schemeArr=[selectedChord.scheme componentsSeparatedByString:@" "];
-        NSLog(@"scheme array %@ %@",schemeArr,selectedChord);
+    }
     
-        for (NSString *fretEnum in schemeArr) {
+    for (NSNumber *numb in fretBoardWhiteMarkersArr) {
+        if ((numb.integerValue >= displayMin) && (numb.integerValue < displayMax)) {
+            NSNumber *drawNumb=[NSNumber numberWithInt:(numb.integerValue-displayMin)];
+            [drawingWhiteMarkersArr addObject:drawNumb];
+        }
+    }
+    
+    for (NSNumber *drawNumb in drawingWhiteMarkersArr)
+    {
+         //int startPos = [selectedChord.fret integerValue];
+         fretY = drawNumb.integerValue;
+         CGPoint centerPoint=CGPointMake(startX + 2.5*shiftX, startY+fretY*shiftY);
+         [view createFreatBoardWhiteMarkersAtCenter:centerPoint withRadius:radius ];
+    }
+    
+    
+    fretY=0;
+    BOOL hasBarre=NO;
+    if (selectedChord.fingers)
+    {
+        
+        NSDictionary *barreDict = [self detectBarreInChord:selectedChord];
+        if (barreDict) {
+            //draw barre
+            int barreStartPos = [[barreDict objectForKey:@"start"] integerValue],
+            barreEndPos   = [[barreDict objectForKey:@"end"] integerValue];
+            CGPoint startBarrePoint=CGPointMake(startX + barreStartPos*shiftX, startY+fretY*shiftY);
+            [view createBarreAtStartPoint:startBarrePoint andRadius:radius withWidth:(barreEndPos-barreStartPos+1)*shiftX];
+            hasBarre=YES;
+        }
+    }
+    
+    NSArray *schemeArr=[selectedChord.scheme componentsSeparatedByString:@" "];
+    NSArray *putFinger=[selectedChord.fingers componentsSeparatedByString:@" "];
+    NSLog(@"put finher %@ %@",putFinger,selectedChord);
+
+    for (NSString *fretEnum in schemeArr) {
+        
+        if ([fretEnum isEqualToString:@"X"] || [fretEnum isEqualToString:@"x"]) {
+            //closed string, don't draw
+        }
+        else if ([fretEnum isEqualToString:@"0"])
+        {
+            CGPoint centerPoint=CGPointMake(startX + stringX*shiftX, startY-shiftY/2);
+            [view createMarkerAtCenter:centerPoint withRadius:7];
             
-            if ([fretEnum isEqualToString:@"X"] || [fretEnum isEqualToString:@"x"]) {
-                //closed string, don't draw
-            }
-            else if ([fretEnum isEqualToString:@"0"])
-            {
-                CGPoint centerPoint=CGPointMake(startX + stringX*shiftX, startY-shiftY/2);
-                [view createMarkerAtCenter:centerPoint withRadius:7];
+        }
+        else if ([fretEnum integerValue])
+        {
+            if (hasBarre && ([fretEnum integerValue] == selectedChord.fret.integerValue)) {
+                //skip blue marker for barre, already drwaed
+                int startPos = [selectedChord.fret integerValue];
+                fretY = [[schemeArr objectAtIndex:stringX] integerValue] - startPos;
+                CGPoint centerPoint=CGPointMake(startX + stringX*shiftX, startY+fretY*shiftY);
+                if ([putFinger count]>stringX) {
+                    [view createMarkerAtCenter:centerPoint withRadius:radius andFingerNumber:(NSString*)[putFinger objectAtIndex:stringX]];
+                }
                 
             }
-            else if ([fretEnum integerValue])
+            else
             {
-                if (hasBarre && ([fretEnum integerValue] == selectedChord.fret.integerValue)) {
-                    //skip barre finger
+                int startPos = [selectedChord.fret integerValue];
+                fretY = [[schemeArr objectAtIndex:stringX] integerValue] - startPos;
+                CGPoint centerPoint=CGPointMake(startX + stringX*shiftX, startY+fretY*shiftY);
+                if ([putFinger count]>stringX) {
+                    [view createMarkerAtCenter:centerPoint withRadius:radius andFingerNumber:(NSString*)[putFinger objectAtIndex:stringX]];
                 }
                 else
                 {
-                    int startPos = [selectedChord.fret integerValue];
-                    fretY = [[schemeArr objectAtIndex:stringX] integerValue] - startPos;
-                    CGPoint centerPoint=CGPointMake(startX + stringX*shiftX, startY+fretY*shiftY);
                     [view createMarkerAtCenter:centerPoint withRadius:radius];
                 }
             }
-            
-            stringX++;
-        }
+        } 
+        stringX++;
+    }
 
 }
 
+-(void) updateBorderColorsInSchemeWithSelectedIndex:(NSInteger) index
+{
+    for (UIView *view in [self.carousel visibleItemViews])
+    {
+        [view setBordersColor:[UIColor clearColor]];
+    }
+    UIView *currentView=[self.carousel itemViewAtIndex:index];
+    [currentView setBordersColor:[UIColor greenColor]];
+}
+
+#pragma mark AudioPlaying Methods
+-(void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)playerEnd successfully:(BOOL)flag {
+    [self.audioPlayerArr removeObject:playerEnd];
+}
+
+-(void) playSelectedChord:(Chord *) chord
+{
+    //not sure about dictionary with open strings mids - use 3 image to create it
+    NSDictionary *midiDict=@{@"0":@52,
+                            @"1":@47,
+                            @"2":@43,
+                            @"3":@38,
+                            @"4":@33,
+                            @"5":@28};
+    
+    NSArray *schemeArr=[chord.scheme componentsSeparatedByString:@" "];
+    NSMutableArray *playingMidiArr=[[NSMutableArray alloc] init];
+    
+    //in scheme order starts from 6 strin, so going backwords by strings
+    int stringX=5;
+    for (NSString *fretEnum in schemeArr)
+    {
+        
+        if ([fretEnum isEqualToString:@"X"] || [fretEnum isEqualToString:@"x"]) {
+            //don't play this string
+        }
+        else
+        {
+            NSNumber *openStringID=[midiDict objectOrNilForKey:[NSString stringWithFormat:@"%d",stringX]];
+            if (openStringID)
+            {
+                NSInteger playingFretId=[fretEnum integerValue]+[openStringID integerValue];
+                if (playingFretId>70)
+                    playingFretId-=12; //- have sounds only to 18fret of 1st string, so after 70th midi play lower note
+                
+                NSNumber *midiNumb=[NSNumber numberWithInt:playingFretId];
+                [playingMidiArr addObject:midiNumb];
+            }
+        }
+        stringX--;
+    }
+    
+    //NSLog(@"Preparing to play midis %@",playingMidiArr);
+    
+    self.audioPlayerArr = [[NSMutableArray alloc] init];
+    stringX=0;
+    float delayBetweenPlayers=.25;
+    
+    for (NSNumber *midiNum in playingMidiArr)
+    {
+        NSString *filePath= [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%d",midiNum.integerValue] ofType:@"dat"];
+
+        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+            NSURL *sound_file = [[NSURL alloc] initFileURLWithPath:filePath];
+            AVAudioPlayer *player1 = [[AVAudioPlayer alloc] initWithContentsOfURL:sound_file error:nil];
+            if (player1) {
+                player1.delegate=self;
+                [audioPlayerArr addObject:player1];
+                [player1 prepareToPlay];
+                
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, stringX * delayBetweenPlayers * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
+                    [player1 play];
+                    //NSLog(@"Playing %@",sound_file.path);
+                });
+                stringX++;
+            }
+        }
+    }
+    
+}
+
+- (IBAction)playChord:(UIButton *)sender {
+    [self playSelectedChord:[selectedChordArray objectAtIndex:self.carousel.currentItemIndex]];
+}
 
 #pragma mark iCarousel methods
 
@@ -324,21 +459,12 @@
     
 }
 
--(void) updateBorderColorsInSchemeWithSelectedIndex:(NSInteger) index
-{
-    for (UIView *view in [self.carousel visibleItemViews])
-    {
-        [view setBordersColor:[UIColor clearColor]];
-    }
-    UIView *currentView=[self.carousel itemViewAtIndex:index];
-    [currentView setBordersColor:[UIColor greenColor]];
-}
-
 - (void)carousel:(iCarousel *)_carousel didSelectItemAtIndex:(NSInteger)index
 {
     
     Chord *thisChord=[self.selectedChordArray objectAtIndex:index];
     [self updateFretBoardWithChord:thisChord inView:self.fretBoardView];
+    [self playSelectedChord:thisChord];
  
     [self updateBorderColorsInSchemeWithSelectedIndex:index];
 
@@ -354,43 +480,10 @@
 - (void)viewDidUnload {
     [self setChordNameLbl:nil];
     [self setFretBoardView:nil];
+    [self setFretLabel:nil];
     [super viewDidUnload];
 }
 
--(void) playSelectedChord:(Chord *) chord
-{
-    
-    [ApiServiceInstance apiGetAudioSampleOfChord:chord success:^(NSData *fileData)
-     {
-         NSLog(@"Loaded file");
-         if ([fileData length]) {
-           
-             NSError *error;
-             [[AVAudioSession sharedInstance] setDelegate: self];
-             [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryAmbient error: &error];      
-             // Activates the audio session.
-             NSError *activationError = nil;
-             [[AVAudioSession sharedInstance] setActive: YES error: &activationError];
-             
-             AVAudioPlayer *newPlayer = [[AVAudioPlayer alloc] initWithData:fileData error:&error];
-             if (newPlayer) {
-                 self.player = newPlayer;
-                 [newPlayer prepareToPlay];
-                 [newPlayer setVolume: 1.0];
-                 [newPlayer play];
-             }
-             
-         }
-     }
-        error:^(NSError *error)
-     {
-        NSLog(@"Error loading file %@",error.description);
-     }];
 
-   
-}
 
-- (IBAction)playChord:(UIButton *)sender {
-    [self playSelectedChord:[selectedChordArray objectAtIndex:self.carousel.currentItemIndex]];
-}
 @end

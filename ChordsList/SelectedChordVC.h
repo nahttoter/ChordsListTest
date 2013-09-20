@@ -20,15 +20,19 @@
 
 #import "ConfigService.h"
 
-@interface SelectedChordVC : UIViewController<iCarouselDataSource, iCarouselDelegate>
+@interface SelectedChordVC : UIViewController<iCarouselDataSource, iCarouselDelegate,AVAudioPlayerDelegate>
 
 @property (nonatomic, strong) IBOutlet UIView *fretBoardView;
 @property (nonatomic, strong) IBOutlet iCarousel *carousel;
 @property (nonatomic, strong) IBOutlet UILabel *chordNameLbl;
+@property (strong, nonatomic) IBOutlet UILabel *fretLabel;
 @property (nonatomic, strong) NSString *chordName;
 
 @property (nonatomic, strong) NSArray *selectedChordArray;
-@property (nonatomic, retain) AVAudioPlayer *player;
+@property (nonatomic, retain) AVAudioPlayer *audioPlayer;
+@property (nonatomic, retain) AVAudioPlayer *audioPlayer2;
+
+@property (nonatomic, strong) NSMutableArray *audioPlayerArr;
 - (IBAction)playChord:(UIButton *)sender;
 
 @end
